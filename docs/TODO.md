@@ -1,13 +1,7 @@
 # TODO LIST
 
-import urllib.parse
+## notifications
 
-def get_redis_key(config, email):
-    safe_email = urllib.parse.quote(email)
-    return config['STORE_BY'].format(safe_email)
-
-get_redis_key(LOGIN_OTP_CONFIG, 'user@example.com')
-# خروجی: otp_auth_email_user%40example.com
 ---
 
 # 🚩F1 Backend Core Development
