@@ -1,0 +1,37 @@
+{% extends "base/base_sign.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Verify Email" %}
+{% endblock %}
+
+{% block body %}
+<div class="relative bg-accountForm shadow-2xl rounded-3xl p-8 w-[90%] sm:w-96">
+    <h2 class="text-3xl font-extrabold text-center mb-6 text-gray-800">
+        {% trans "Email Verification" %}
+    </h2>
+
+    <form method="post" class="space-y-6 relative z-10">
+        {% csrf_token %}
+
+        <!-- Verification Code Input -->
+        <div class="relative">
+            <label for="code" class="block text-sm font-semibold text-gray-600 mb-2">
+                {% trans "Verification Code" %}
+            </label>
+            <input type="text" id="code" name="code" placeholder="{% trans 'Enter your code' %}"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            <div id="code-error" class="absolute top-full mt-1 text-errorRed text-sm">
+                {{ form.code.errors.0 }}
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+                class="w-full bg-indigo-600 text-white py-3 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-purple-300">
+            {% trans "Verify and Continue" %}
+        </button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!-- Header Section -->
+<header class="bg-gray-800 text-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex items-center justify-between px-6 py-3">
+        <!-- Logo -->
+        <a href="/" class="text-2xl font-bold hover:text-indigo-400">لوگو</a>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex space-x-6">
+            <a href="/" class="hover:text-indigo-300">صفحه اصلی</a>
+            <a href="/profile" class="hover:text-indigo-300">پروفایل</a>
+            <a href="/settings" class="hover:text-indigo-300">تنظیمات</a>
+            <a href="/help" class="hover:text-indigo-300">راهنما</a>
+        </nav>
+
+        <!-- Profile & Menu -->
+        <div class="flex items-center space-x-4">
+            <!-- Notification Icon -->
+            <button id="notificationButton" class="relative">
+                <i class="fas fa-bell text-xl hover:text-indigo-300"></i>
+                <span id="notificationBadge" class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+            </button>
+
+            <!-- Profile Dropdown -->
+            <div class="relative">
+                <ul id="profileDropdownMenu" class="absolute right-0 hidden bg-white text-gray-800 rounded shadow-md mt-2 w-40">
+                    <li><a href="/profile" class="block px-4 py-2 hover:bg-gray-100">پروفایل</a></li>
+                    <li><a href="/settings" class="block px-4 py-2 hover:bg-gray-100">تنظیمات</a></li>
+                    <li><a href="/logout" class="block px-4 py-2 hover:bg-gray-100">خروج</a></li>
+                </ul>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuButton" class="md:hidden">
+                <i class="fas fa-bars text-xl hover:text-indigo-300"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="mobileMenu" class="hidden bg-gray-800 text-white p-4 space-y-4">
+        <a href="/" class="block hover:text-indigo-300">صفحه اصلی</a>
+        <a href="/profile" class="block hover:text-indigo-300">پروفایل</a>
+        <a href="/settings" class="block hover:text-indigo-300">تنظیمات</a>
+        <a href="/help" class="block hover:text-indigo-300">راهنما</a>
+    </nav>
+</header>

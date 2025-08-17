@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "Profile" %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-4">
+                <img src="{{ profile.get_image_url }}" alt="{% trans 'Profile Image' %}"
+                     class="rounded-circle me-3" width="100" height="100">
+                <div>
+                    <h4 class="mb-0">{{ profile.user.full_name }}</h4>
+                    <small class="text-muted">{{ profile.user.email }}</small>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>{% trans "First Name" %}:</strong> {{ profile.user.first_name }}</p>
+                    <p><strong>{% trans "Last Name" %}:</strong> {{ profile.user.last_name }}</p>
+                    <p><strong>{% trans "Phone Number" %}:</strong> {{ profile.phone_number }}</p>
+                    <p><strong>{% trans "National ID" %}:</strong> {{ profile.national_id }}</p>
+                    <p><strong>{% trans "Gender" %}:</strong> {{ profile.get_gender_display }}</p>
+                    <p><strong>{% trans "Degree" %}:</strong> {{ profile.degree }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>{% trans "City" %}:</strong> {{ profile.city }}</p>
+                    <p><strong>{% trans "Skills" %}:</strong> {{ profile.skills }}</p>
+                    <p><strong>{% trans "Biography" %}:</strong> {{ profile.bio }}</p>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+                <a href="{% url 'account:edit_profile' %}" class="btn btn-outline-primary">
+                    {% trans "Edit Profile" %}
+                </a>
+                <a href="{% url 'account:logout' %}" class="btn btn-outline-danger">
+                    {% trans "Logout" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base/base_sign.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "User Details" %}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="mb-4 text-center">{% trans "Your Account Information" %}</h4>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>{% trans "Full Name" %}:</strong> {{ user.full_name }}
+                </li>
+                <li class="list-group-item">
+                    <strong>{% trans "Email" %}:</strong> {{ user.email }}
+                </li>
+                <li class="list-group-item">
+                    <strong>{% trans "Role" %}:</strong> {{ user.get_role_display }}
+                </li>
+                <li class="list-group-item">
+                    <strong>{% trans "Verified" %}:</strong>
+                    {% if user.is_verified %}
+                        {% trans "Yes" %}
+                    {% else %}
+                        {% trans "No" %}
+                    {% endif %}
+                </li>
+            </ul>
+
+            <div class="mt-4 text-center">
+                <a href="{% url 'account:profile' %}" class="btn btn-outline-primary">
+                    {% trans "Back to Profile" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

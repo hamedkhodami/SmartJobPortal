@@ -1,0 +1,52 @@
+{% extends "base/base_sign.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Set New Password" %}
+{% endblock %}
+
+{% block body %}
+<div class="relative bg-accountForm shadow-2xl rounded-3xl p-8 w-[90%] sm:w-96">
+    <h2 class="text-3xl font-extrabold text-center mb-6 text-gray-800">
+        {% trans "Set a New Password" %}
+    </h2>
+
+    <form method="post" action="{% url 'account:reset_pass_complete' %}" class="space-y-6 relative z-10">
+        {% csrf_token %}
+
+        <!-- Password Input -->
+        <div class="relative">
+            <label for="password" class="block text-sm font-semibold text-gray-600 mb-2">
+                {% trans "Password" %}
+            </label>
+            <input type="password" id="password" name="password" placeholder="{% trans '**' %}"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            <button type="button" id="togglePassword" class="absolute inset-y-12 right-5 flex items-center text-gray-500">
+                <i id="eyeIcon" class="fas fa-eye"></i>
+            </button>
+            <div id="password-error" class="absolute top-full mt-1 text-errorRed text-sm">
+                {{ form.password.errors.0 }}
+            </div>
+        </div>
+
+        <!-- Confirm Password Input -->
+        <div class="relative">
+            <label for="password2" class="block text-sm font-semibold text-gray-600 mb-2">
+                {% trans "Confirm Password" %}
+            </label>
+            <input type="password" id="password2" name="password2" placeholder="{% trans '**' %}"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            <div id="password2-error" class="absolute top-full mt-1 text-errorRed text-sm">
+                {{ form.password2.errors.0 }}
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+                class="w-full bg-indigo-600 text-white py-3 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-purple-300">
+            {% trans "Save Password" %}
+        </button>
+    </form>
+</div>
+{% endblock %}

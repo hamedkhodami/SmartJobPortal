@@ -33,6 +33,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third party app
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    'drf_yasg',
+    'rosetta',
+
+    # apps
+    'apps.core.apps.CoreConfig',
+    'apps.account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,15 +155,103 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # ---Auth user model---------------------------------------------
-#AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'account.User'
+
+LOGIN_URL = '/u/login'
+
+LOGIN_OTP_CONFIG = {
+    'TIMEOUT': 180,
+    'CODE_LENGTH': 6,
+    'STORE_BY': 'otp_auth_email_{}'
+}
+
+USER_OTP_CONFIG = {
+    'TIMEOUT': 180,
+    'CODE_LENGTH': 4,
+    'STORE_BY': 'user_otp_auth_email_{}'
+}
+
+RESET_PASSWORD_CONFIG = {
+    'TIMEOUT': 180,
+    'CODE_LENGTH': 4,
+    'STORE_BY': 'reset_password_email_{}'
+}
+
+CONFIRM_EMAIL_CONFIG = {
+    'TIMEOUT': 180,
+    'CODE_LENGTH': 4,
+    'STORE_BY': 'confirm_email_{}'
+}
+
 # ---------------------------------------------------------------
 
 
-# ---REDIS-------------------------------------------------------
+# ---Redis-------------------------------------------------------
 REDIS_CONFIG = {
-    'active': int(os.getenv('REDIS_ACTIVE', 0)),
-    'host': os.getenv('REDIS_HOST', 'localhost'),
-    'port': int(os.getenv('REDIS_PORT', 6379))
+    'DB': int(os.getenv('REDIS_DB', 0)),
+    'HOST': os.getenv('REDIS_HOST', 'localhost'),
+    'PORT': os.getenv('REDIS_PORT', '6379'),
+    'CHANNEL_NAME': os.getenv('REDIS_CHANNEL_NAME', 'market_price')
 }
 # ---------------------------------------------------------------
+
+
+# ---API---------------------------------------------------------
+API_VERSION = 'v1'
+API_URL_LABEL = 'api'
+# ---------------------------------------------------------------
+
+
+# ---SWAGGER-----------------------------------------------------
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "JWT", "name": "authorization", "in": "header"},
+    },
+}
+# ---------------------------------------------------------------
+
+
+# ---REST_FRAMEWORK----------------------------------------------
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'apps.core.exceptions.custom_exception_handler',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'apps.account.auth.authentication.BaseJWTAuthentication',
+    ],
+}
+# ---------------------------------------------------------------
+
+
+# ---JWT---------------------------------------------------------
+DEFAULT_JWT_CONFIG = {
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True
+}
+# ---------------------------------------------------------------
+
+
+# ---CACHES------------------------------------------------------
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.getenv("REDIS_CACHE_LOCATION", "redis://127.0.0.1:6379")
+    }
+}
+# ---------------------------------------------------------------
+
+
+# --ROSETTA------------------------------------------------------
+ROSETTA_ACCESS_CONTROL_FUNCTION = lambda u: u.is_staff
+# ---------------------------------------------------------------
+
 

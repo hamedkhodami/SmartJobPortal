@@ -1,0 +1,62 @@
+{% extends "base/base_sign.html" %}
+{% load i18n %}
+
+{% load static %}
+
+{% block title %}
+{% trans "Login" %}
+{% endblock %}
+
+{% block body %}
+    <!-- Login Form Container -->
+    <div class="relative bg-accountForm shadow-2xl rounded-3xl p-8 w-[90%] sm:w-96">
+        <!-- Decorative Circle Background -->
+        <div class="absolute -top-8 -right-8 w-20 h-20 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute -bottom-8 -left-8 w-28 h-28 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+        <h2 class="text-3xl font-extrabold text-center mb-6 text-gray-800">{% trans "login to your account" %}</h2>
+
+        <!-- Login Form -->
+        <form method="post" action="{% url 'account:login' %}" class="space-y-6 relative z-10">
+            {% csrf_token %}
+
+            <!-- Username Input -->
+            <div class="relative">
+                <label dir="rtl" for="email" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "Email" %}</label>
+                <input type="email" id="email" name="email"
+                       class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            </div>
+
+            <!-- Password Input -->
+            <div class="relative">
+                <label dir="rtl" for="password" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "Password" %}</label>
+                <input type="password" id="password" name="password" placeholder="**"
+                       class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+                <button type="button" id="togglePassword" class="absolute inset-y-12 right-5 flex items-center text-gray-500">
+                    <i id="eyeIcon" class="fas fa-eye"></i>
+                </button>
+                <div id="password-error" class="absolute top-full mt-1 text-errorRed text-sm">
+                    {{ form.password.errors.0 }}
+                </div>
+            </div>
+
+            <!-- Remember Me Checkbox -->
+            <div class="flex items-center">
+                <input type="checkbox" id="remember_me" name="remember_me"
+                       class="form-check-input h-4 w-4 text-indigo-600 focus:ring-indigo-300 border-gray-300 rounded">
+                <label for="remember_me" class="ml-2 block text-sm font-semibold text-gray-600">{% trans "remember me" %}</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="w-full bg-indigo-600 text-white py-3 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-purple-300">
+                {% trans "Login" %}
+            </button>
+        </form>
+
+        <!-- Forgot Password Link -->
+        <div class="mt-6 text-center">
+            <a href="{% url 'account:get_phone_number' %}" class="text-sm text-indigo-600 font-semibold hover:text-indigo-500 hover:underline">{% trans "forget password" %}</a>
+        </div>
+    </div>
+{% endblock %}

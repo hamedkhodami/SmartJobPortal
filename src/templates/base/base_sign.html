@@ -1,0 +1,32 @@
+{% load static %}
+{% load i18n %}
+<html lang="fa" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+
+  <title>{% block title%}{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'public/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'public/css/main.css' %}">
+  <link rel="icon" href="{% static 'public/images/logo.png' %}" type="image/x-icon">
+    {% block extra_style %}
+    {% endblock %}
+</head>
+
+<body class="bg-gradient-green-blue flex items-center justify-center min-h-screen">
+
+{% block body %}
+{% endblock %}
+
+
+  <script rel="" src="{% static 'public/js/sign.js' %}"></script>
+  {% block extra_script %}
+  {% endblock %}
+
+</body>
+
+</html>

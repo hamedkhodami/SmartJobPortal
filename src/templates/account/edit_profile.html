@@ -1,0 +1,54 @@
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "Edit Profile" %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="mb-4">{% trans "Edit Your Profile" %}</h4>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">{% trans "First Name" %}</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control"
+                           value="{{ request.user.first_name }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">{% trans "Last Name" %}</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control"
+                           value="{{ request.user.last_name }}">
+                </div>
+
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <a href="{% url 'account:profile' %}" class="btn btn-secondary">
+                        {% trans "Cancel" %}
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        {% trans "Save Changes" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

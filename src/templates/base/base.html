@@ -1,0 +1,43 @@
+{% load static %}
+{% load i18n %}
+<html lang="fa" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+
+  <title>{% block title%}{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'public/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'public/css/main.css' %}">
+  <link rel="icon" href="{% static 'public/images/logo.png' %}" type="image/x-icon">
+    {% block extra_style %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+{% include "base/header.html" %}
+
+
+{% block content %}
+{% endblock %}
+
+
+{% include "base/footer.html" %}
+
+
+
+  <script rel="" src="{% static 'public/js/main.js' %}"></script>
+  <!-- Persian Datepicker Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-date@1.0.6/dist/persian-date.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+  {% block extra_script %}
+  {% endblock %}
+</body>
+
+</html>
