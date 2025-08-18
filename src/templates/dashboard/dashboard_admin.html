@@ -1,0 +1,24 @@
+{% load i18n %}
+{% block title %}{% trans "Admin Dashboard" %}{% endblock %}
+
+{% block content %}
+  <h2 class="mb-3">{% trans "Welcome" %} {{ user.full_name }}</h2>
+
+  <div class="mb-4">
+    <p>{% trans "Pending jobs" %}: {{ pending_jobs }}</p>
+    <p>{% trans "Active jobs" %}: {{ active_jobs }}</p>
+    <p>{% trans "Total users" %}: {{ users_count }}</p>
+    <p>{% trans "Total applications" %}: {{ applications_count }}</p>
+  </div>
+
+  <div class="mb-4">
+    <a href="{% url 'job:create' %}" class="btn btn-success mb-2">➕ {% trans "Create Job" %}</a><br>
+    <a href="{% url 'account:create_admin' %}" class="btn btn-warning mb-2">🛡️ {% trans "Create New Admin" %}</a><br>
+    <a href="{% url 'account:block_list' %}" class="btn btn-danger mb-2">🚫 {% trans "Block a User" %}</a><br>
+    <a href="{% url 'account:user_list' %}" class="btn btn-outline-primary mb-2">👥 {% trans "All Users" %}</a><br>
+    <a href="{% url 'job:job_list' %}" class="btn btn-outline-info mb-2">📋 {% trans "All Jobs" %}</a><br>
+
+    <a href="{% url 'account:profile' %}">⚙️ {% trans "Profile Settings" %}</a><br>
+    <a href="{% url 'account:logout' %}" class="btn btn-dark mt-3">🚪 {% trans "Logout" %}</a>
+  </div>
+{% endblock %}

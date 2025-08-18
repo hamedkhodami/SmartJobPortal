@@ -1,0 +1,15 @@
+{% load i18n %}
+
+
+{% block content %}
+
+  {% if role == "employer" %}
+    {% include "dashboard/dashboard_employer.html" %}
+
+  {% elif role == "job_seeker" %}
+    {% include "dashboard/dashboard_job_seeker.html" %}
+
+  {% elif role == "admin" %}
+    {% include "dashboard/dashboard_admin.html" %}
+  {% endif %}
+{% endblock %}

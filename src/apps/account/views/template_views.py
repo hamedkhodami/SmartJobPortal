@@ -2,26 +2,24 @@ from random import randint
 
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
-from django.shortcuts import redirect, reverse
-from django.views.generic import FormView, RedirectView, DetailView, UpdateView, View
+from django.shortcuts import redirect, reverse, get_object_or_404
+from django.views.generic import FormView, RedirectView, DetailView, UpdateView, View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
-from django.contrib.auth.mixins import UserPassesTestMixin
 
 from apps.core.utils import validate_form, toast_form_errors
 
-from ..models import UserProfileModel, User
+from ..models import UserProfileModel, User, UserBlock
 from ..mixins import LogoutRequiredMixin, AccessRequiredMixin
 from ..forms import LoginForm, GetEmailForm, ResetPassForm, VerifyEmailForm, RegisterForm, EditProfileForm, AdminCreationForm
-
 
 
 class LoginView(LogoutRequiredMixin, FormView):
 
     template_name = 'account/login.html'
     form_class = LoginForm
-    success_url = reverse_lazy('public:index')
+    success_url = reverse_lazy('dashboard:dashboard')
 
     def form_valid(self, form):
         user = form.get_user()
@@ -196,10 +194,10 @@ class logoutView(LoginRequiredMixin, RedirectView):
         return super().get(request, *args, **kwargs)
 
 
-class CreateAdminView(UserPassesTestMixin, FormView):
+class CreateAdminView(AccessRequiredMixin, FormView):
     template_name = 'account/admin/create_admin.html'
     form_class = AdminCreationForm
-    success_url = reverse_lazy('public:index')
+    success_url = reverse_lazy('dashboard:dashboard')
 
     def test_func(self):
         return self.request.user.is_superuser
@@ -249,7 +247,59 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return response
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
-    template_name = 'account/user_detail.html'
+class UserListView(LoginRequiredMixin, AccessRequiredMixin, ListView):
+    template_name = 'account/user_list.html'
     model = User
-    context_object_name = 'user'
+    roles = ['admin']
+    paginate_by = 10
+
+    def get_queryset(self):
+        return User.objects.filter(userblock__isnull=True).order_by('-created_at')
+
+
+class BlockUserView(LoginRequiredMixin, AccessRequiredMixin, View):
+    roles = ['admin']
+
+    def post(self, request, pk):
+        user = get_object_or_404(User, pk=pk)
+        if user.is_blocked:
+            messages.warning(request, _("User is already blocked."))
+        else:
+            UserBlock.objects.create(user=user, admin=request.user)
+            messages.success(request, _("User has been blocked."))
+        return redirect('account:user_list')
+
+
+class DeleteUserView(LoginRequiredMixin, AccessRequiredMixin, View):
+    roles = ['admin']
+
+    def post(self, request, pk):
+        user = get_object_or_404(User, pk=pk)
+        user.delete()
+        messages.success(request, _("User has been deleted."))
+        return redirect('account:user_list')
+
+
+class UserBlockListView(LoginRequiredMixin, AccessRequiredMixin, ListView):
+    template_name = 'account/block_list.html'
+    model = User
+    roles = ['admin']
+    paginate_by = 10
+
+    def get_queryset(self):
+        return User.objects.filter(userblock__isnull=False).order_by('-created_at')
+
+
+class UnBlockUserView(LoginRequiredMixin, AccessRequiredMixin, View):
+    roles = ['admin']
+
+    def post(self, request, pk):
+        user = get_object_or_404(User, pk=pk)
+
+        if not user.is_blocked:
+            messages.warning(request, _("User is not blocked."))
+        else:
+            user.userblock.delete()
+            messages.success(request, _("User has been unblocked."))
+
+        return redirect('account:block_list')

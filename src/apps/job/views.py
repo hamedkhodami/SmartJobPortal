@@ -61,7 +61,7 @@ class JobCreateView(LoginRequiredMixin, JobEmployerRequiredMixin, CreateView):
     model = JobModel
     form_class = JobForm
     template_name = 'jobs/employer/job_create.html'
-    success_url = reverse_lazy('public:index')
+    success_url = reverse_lazy('dashboard:dashboard')
 
     def form_valid(self, form):
         form.instance.employer = self.request.user
@@ -202,4 +202,4 @@ class CancelApplicationView(LoginRequiredMixin, JobSeekerRequiredMixin, View):
         application = get_object_or_404(ApplicationModel, pk=pk, seeker=request.user)
         application.delete()
         messages.success(request, _("Your application has been cancelled."))
-        return redirect('job:my_applications')
+        return redirect('dashboard:dashboard')

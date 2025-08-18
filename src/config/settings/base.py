@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'apps.core.apps.CoreConfig',
     'apps.account.apps.AccountConfig',
     'apps.job.apps.JobConfig',
+    'apps.dashboard.apps.DashboardConfig',
+    'apps.notification.apps.NotificationConfig',
+    'apps.public.apps.PublicConfig',
+
 ]
 
 MIDDLEWARE = [

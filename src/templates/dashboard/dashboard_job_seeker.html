@@ -1,0 +1,16 @@
+{% load i18n %}
+{% block title %}{% trans "Dashboard" %}{% endblock %}
+
+{% block content %}
+  <h2 class="mb-3">{% trans "Welcome" %} {{ user.full_name }}</h2>
+
+  <p>{% trans "Applied jobs" %}: {{ applied_count }}</p>
+  <p>{% trans "Accepted" %}: {{ accepted_count }} | {% trans "Rejected" %}: {{ rejected_count }}</p>
+
+  <a href="{% url 'job:job_list' %}">🔍 {% trans "Browse Jobs" %}</a><br>
+  <a href="{% url 'job:my_applications' %}">📩 {% trans "My Applications" %}</a><br>
+
+  <a href="{% url 'account:profile' %}">⚙️ {% trans "Profile Settings" %}</a><br>
+  <a href="{% url 'account:logout' %}">🚪 {% trans "Logout" %}</a>
+
+{% endblock %}

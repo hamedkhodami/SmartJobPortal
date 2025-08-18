@@ -1,4 +1,3 @@
-{# templates/jobs/my_applications.html #}
 {% load i18n %}
 {% block title %}{% trans "My Applications" %}{% endblock %}
 
@@ -13,12 +12,14 @@
           <br>
           <small>{% trans "Status" %}: {{ app.get_status_display }}</small>
           <br>
-          <form method="post" action="{% url 'job:cancel_application' app.pk %}" style="margin-top: 5px;">
-            {% csrf_token %}
-            <button type="submit" onclick="return confirm('{% trans "Are you sure you want to cancel this application?" %}')">
-              {% trans "Cancel Application" %}
-            </button>
-          </form>
+          {% if app.status == 'submitted' %}
+            <form method="post" action="{% url 'job:cancel_application' app.pk %}" style="margin-top: 5px;">
+              {% csrf_token %}
+              <button type="submit" onclick="return confirm('{% trans "Are you sure you want to cancel this application?" %}')">
+                {% trans "Cancel Application" %}
+              </button>
+            </form>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>

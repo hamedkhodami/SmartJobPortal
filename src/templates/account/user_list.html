@@ -1,0 +1,36 @@
+{% load i18n %}
+<h2>{% trans "User List" %}</h2>
+
+{% if object_list %}
+  <table>
+    <thead>
+      <tr>
+        <th>{% trans "Full Name" %}</th>
+        <th>{% trans "Email" %}</th>
+        <th>{% trans "Role" %}</th>
+        <th>{% trans "Actions" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in object_list %}
+        <tr>
+          <td>{{ user.full_name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.get_role_display }}</td>
+          <td>
+            <form method="post" action="{% url 'account:block_user' user.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" onclick="return confirm('{% trans "Block this user?" %}')">🚫 {% trans "Block" %}</button>
+            </form>
+            <form method="post" action="{% url 'account:delete_user' user.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" onclick="return confirm('{% trans "Delete this user?" %}')">🗑️ {% trans "Delete" %}</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>{% trans "No users found." %}</p>
+{% endif %}

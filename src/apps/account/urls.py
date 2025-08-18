@@ -32,5 +32,9 @@ urlpatterns = [
     path('create-admin/', template_views.CreateAdminView.as_view(), name='create_admin'),
     path('profile/', template_views.ProfileView.as_view(), name='profile'),
     path('profile/edit/', template_views.EditProfileView.as_view(), name='edit_profile'),
-    path('users/<int:pk>/', template_views.UserDetailView.as_view(), name='user_detail')
+    path('users/', template_views.UserListView.as_view(), name='user_list'),
+    path('blocklist/', template_views.UserBlockListView.as_view(), name='block_list'),
+    path('users/<int:pk>/block/', template_views.BlockUserView.as_view(), name='block_user'),
+    path('users/<int:pk>/unblock/', template_views.UnBlockUserView.as_view(), name='unblock_user'),
+    path('users/<int:pk>/delete/', template_views.DeleteUserView.as_view(), name='delete_user'),
 ]
