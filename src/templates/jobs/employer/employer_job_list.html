@@ -1,0 +1,53 @@
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "My Job Postings" %}
+{% endblock %}
+
+{% block content %}
+  <h2>{% trans "My Job Postings" %}</h2>
+
+  {% if jobs %}
+    <ul>
+      {% for job in jobs %}
+        <li>
+          <strong>{{ job.title }}</strong> —
+          {{ job.salary_range }} |
+          {% if job.is_active %}
+            {% trans "Active" %}
+          {% else %}
+            {% trans "Inactive" %}
+          {% endif %}
+
+          <br>
+
+          <a href="{% url 'job:employer_job_edit' job.pk %}" class="btn btn-sm btn-outline-primary">
+            {% trans "Edit" %}
+          </a>
+
+          <a href="{% url 'job:employer_job_delete' job.pk %}" class="btn btn-sm btn-outline-danger">
+            {% trans "Delete" %}
+          </a>
+        </li>
+        <hr>
+      {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+        {% endif %}
+
+        <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% else %}
+    <p>{% trans "You haven't posted any jobs yet." %}</p>
+  {% endif %}
+{% endblock %}

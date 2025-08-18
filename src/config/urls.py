@@ -32,6 +32,7 @@ urlpatterns_swagger = [
 
 urlpatterns_api = [
     path('account/', include('apps.account.urls', namespace='account')),
+    path('job/', include('apps.job.urls', namespace='job')),
     path('/', include('apps.public.urls', namespace='public')),
 
 ]

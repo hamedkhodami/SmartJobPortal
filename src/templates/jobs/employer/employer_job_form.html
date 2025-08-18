@@ -1,0 +1,81 @@
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "Edit Job Posting" %}
+{% endblock %}
+
+{% block content %}
+  <h2>{% trans "Edit Job Posting" %}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+      {{ form.title }}
+      {% if form.title.errors %}
+        <div class="text-danger">{{ form.title.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+      {{ form.description }}
+      {% if form.description.errors %}
+        <div class="text-danger">{{ form.description.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.location.id_for_label }}">{{ form.location.label }}</label>
+      {{ form.location }}
+      {% if form.location.errors %}
+        <div class="text-danger">{{ form.location.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.employment_type.id_for_label }}">{{ form.employment_type.label }}</label>
+      {{ form.employment_type }}
+      {% if form.employment_type.errors %}
+        <div class="text-danger">{{ form.employment_type.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.salary_min.id_for_label }}">{{ form.salary_min.label }}</label>
+      {{ form.salary_min }}
+      {% if form.salary_min.errors %}
+        <div class="text-danger">{{ form.salary_min.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.salary_max.id_for_label }}">{{ form.salary_max.label }}</label>
+      {{ form.salary_max }}
+      {% if form.salary_max.errors %}
+        <div class="text-danger">{{ form.salary_max.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.is_approved.id_for_label }}">{{ form.is_approved.label }}</label>
+      {{ form.is_approved }}
+      {% if form.is_approved.errors %}
+        <div class="text-danger">{{ form.is_approved.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.is_closed.id_for_label }}">{{ form.is_closed.label }}</label>
+      {{ form.is_closed }}
+      {% if form.is_closed.errors %}
+        <div class="text-danger">{{ form.is_closed.errors }}</div>
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{% trans "Save Changes" %}</button>
+    <a href="{% url 'job:employer-job-list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+  </form>
+{% endblock %}

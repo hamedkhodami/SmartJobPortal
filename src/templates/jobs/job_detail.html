@@ -1,0 +1,27 @@
+{# templates/jobs/job_detail.html #}
+{% load i18n %}
+{% block title %}{{ job.title }}{% endblock %}
+
+{% block content %}
+  <h2>{{ job.title }}</h2>
+  <p><strong>{% trans "Location" %}:</strong> {{ job.location }}</p>
+  <p><strong>{% trans "Employment type" %}:</strong> {{ job.get_employment_type_display }}</p>
+  <p><strong>{% trans "Salary" %}:</strong> {{ job.salary_range }}</p>
+  <p><strong>{% trans "Description" %}:</strong></p>
+  <p>{{ job.description|linebreaks }}</p>
+
+  {% if can_apply %}
+    {% if has_applied %}
+      <p style="color: gray;">{% trans "You have already applied for this job." %}</p>
+    {% else %}
+      <a href="{% url 'job:job_apply' job.pk %}" class="btn btn-success">
+        {% trans "Apply for this job" %}
+      </a>
+    {% endif %}
+  {% else %}
+    <p style="color: gray;">{% trans "Employers cannot apply for jobs." %}</p>
+  {% endif %}
+
+
+  <a href="{% url 'job:job_list' %}">{% trans "Back to job listings" %}</a>
+{% endblock %}

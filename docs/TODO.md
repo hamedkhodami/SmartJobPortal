@@ -8,7 +8,7 @@
 
 ### ✓ level 1 complete core
 ### ✓ level 2 complete account
-### [] level 3 complete job
+### ✓ level 3 complete job
 ### [] level 4 complete notification
 ### [] level 5 complete dashboard
 ### [] level 6 complete public

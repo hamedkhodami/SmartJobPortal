@@ -1,0 +1,36 @@
+{% load i18n %}
+{% block title %}
+  {% trans "Accepted Jobs" %}
+{% endblock %}
+
+{% block content %}
+  <h2>{% trans "Accepted Jobs" %}</h2>
+
+  {% if accepted_jobs %}
+    <ul>
+      {% for app in accepted_jobs %}
+        <li>
+          <strong>{{ app.job.title }}</strong><br>
+          {% trans "Taken by" %}: {{ app.seeker.get_full_name }} ({{ app.seeker.email }})<br>
+          {% trans "Location" %}: {{ app.job.location }}<br>
+          {% trans "Salary" %}: {{ app.job.salary_range }}
+        </li>
+        <hr>
+      {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+        {% endif %}
+        <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% else %}
+    <p>{% trans "No accepted jobs yet." %}</p>
+  {% endif %}
+{% endblock %}

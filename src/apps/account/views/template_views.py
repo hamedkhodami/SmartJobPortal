@@ -1,18 +1,20 @@
+from random import randint
+
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, reverse
-from django.views.generic import FormView, RedirectView, DetailView, UpdateView, ListView, View
+from django.views.generic import FormView, RedirectView, DetailView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-
-from random import randint
+from apps.core.utils import validate_form, toast_form_errors
 
 from ..models import UserProfileModel, User
 from ..mixins import LogoutRequiredMixin, AccessRequiredMixin
-from ..forms import LoginForm, GetEmailForm, ResetPassForm, VerifyEmailForm, RegisterForm, EditProfileForm
-from apps.core.utils import validate_form, toast_form_errors
+from ..forms import LoginForm, GetEmailForm, ResetPassForm, VerifyEmailForm, RegisterForm, EditProfileForm, AdminCreationForm
+
 
 
 class LoginView(LogoutRequiredMixin, FormView):
@@ -192,6 +194,28 @@ class logoutView(LoginRequiredMixin, RedirectView):
         logout(request)
         messages.success(request, _('You have been logged out'))
         return super().get(request, *args, **kwargs)
+
+
+class CreateAdminView(UserPassesTestMixin, FormView):
+    template_name = 'account/admin/create_admin.html'
+    form_class = AdminCreationForm
+    success_url = reverse_lazy('public:index')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        messages.error(self.request, _('Access denied.'))
+        return redirect('account:login')
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, _('Admin user created successfully.'))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        toast_form_errors(self.request, form)
+        return super().form_invalid(form)
 
 
 class ProfileView(LoginRequiredMixin, DetailView):

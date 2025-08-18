@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'drf_yasg',
     'rosetta',
+    #'django_elasticsearch_dsl',
 
     # apps
     'apps.core.apps.CoreConfig',
     'apps.account.apps.AccountConfig',
+    'apps.job.apps.JobConfig',
 ]
 
 MIDDLEWARE = [
@@ -255,3 +257,10 @@ ROSETTA_ACCESS_CONTROL_FUNCTION = lambda u: u.is_staff
 # ---------------------------------------------------------------
 
 
+# ---ELASTICSEARCH-----------------------------------------------
+#ELASTICSEARCH_DSL = {
+#    'default': {
+#        'hosts': os.getenv('ELASTICSEARCH_HOST', 'localhost:9200')
+#    }
+#}
+# ---------------------------------------------------------------

@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from apps.core.validators import OnlyPersianCharsValidator
 from .models import User, UserProfileModel
-from .enums import UserGenderEnum
+from .enums import UserGenderEnum, UserRoleEnum
 
 
 class LoginForm(forms.Form):
@@ -64,6 +64,16 @@ class RegisterForm(forms.Form):
         validators=[OnlyPersianCharsValidator],
         required=False
     )
+    role = forms.ChoiceField(
+        label=_("Role"),
+        choices=[
+            (UserRoleEnum.EMPLOYER, UserRoleEnum.EMPLOYER.label),
+            (UserRoleEnum.JOB_SEEKER, UserRoleEnum.JOB_SEEKER.label),
+        ],
+        widget=forms.Select,
+        required=True
+    )
+
     password = forms.CharField(
         label=_("Password"),
         widget=forms.PasswordInput,
@@ -101,6 +111,7 @@ class RegisterForm(forms.Form):
             email=self.cleaned_data['email'],
             first_name=self.cleaned_data.get('first_name') or _('No Name'),
             last_name=self.cleaned_data.get('last_name') or _('No Name'),
+            role=self.cleaned_data['role'],
             is_active=True,
             is_verified=False
         )
@@ -153,11 +164,38 @@ class ResetPassForm(forms.Form):
         return password2
 
 
+class AdminCreationForm(forms.ModelForm):
+    password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label=_("Confirm Password"), widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['email', 'password', 'confirm_password']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm = cleaned_data.get("confirm_password")
+        if password and confirm and password != confirm:
+            raise forms.ValidationError(_("Passwords do not match."))
+        return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        user.role = UserRoleEnum.ADMIN
+        user.is_active = True
+        user.is_verified = True
+        if commit:
+            user.save()
+        return user
+
+
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfileModel
         fields = [
-            'phone_number', 'national_id', 'gender', 'bio',
+            'phone_number', 'gender', 'bio',
             'image', 'degree', 'city', 'skills'
         ]
         widgets = {
@@ -166,7 +204,6 @@ class EditProfileForm(forms.ModelForm):
         }
         labels = {
             'phone_number': _('Phone Number'),
-            'national_id': _('National ID'),
             'gender': _('Gender'),
             'bio': _('Biography'),
             'image': _('Profile Image'),
@@ -177,11 +214,6 @@ class EditProfileForm(forms.ModelForm):
         error_messages = {
             'phone_number': {
                 'max_length': _('Phone number must not exceed 11 digits.'),
-            },
-            'national_id': {
-                'unique': _('This national ID is already registered.'),
-                'max_length': _('National ID must not exceed 11 digits.'),
-                'min_length': _('National ID must be at least 9 digits.'),
             },
         }
 

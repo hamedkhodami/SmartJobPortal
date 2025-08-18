@@ -1,0 +1,45 @@
+{# templates/jobs/job_list.html #}
+{% load i18n %}
+{% block content %}
+  <h2>{% trans "Available Jobs" %}</h2>
+
+  <form method="get" style="margin-bottom: 20px;">
+    <label for="employment_type">{% trans "Filter by employment type" %}:</label>
+    <select name="employment_type" id="employment_type" onchange="this.form.submit()">
+      {% for value, label in employment_type_choices %}
+        <option value="{{ value }}" {% if value == employment_type_selected %}selected{% endif %}>
+          {{ label }}
+        </option>
+      {% endfor %}
+    </select>
+  </form>
+
+  {% if jobs %}
+    <ul>
+      {% for job in jobs %}
+      <a href="{% url 'job:job_detail' job.pk %}">
+        <li>
+          <strong>{{ job.title }}</strong> — {{ job.location }}<br>
+          {{ job.salary_range }} | {{ job.get_employment_type_display }}
+        </li>
+        <hr>
+      </a>
+      {% endfor %}
+    </ul>
+
+
+    {% if is_paginated %}
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}&employment_type={{ employment_type_selected }}">{% trans "Previous" %}</a>
+        {% endif %}
+        <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}&employment_type={{ employment_type_selected }}">{% trans "Next" %}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% else %}
+    <p>{% trans "No jobs available at the moment." %}</p>
+  {% endif %}
+{% endblock %}

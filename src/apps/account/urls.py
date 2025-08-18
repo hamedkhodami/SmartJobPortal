@@ -29,6 +29,7 @@ urlpatterns = [
     path('password/reset/complete/', template_views.ResetPassCompleteView.as_view(), name='reset_pass_complete'),
     path('register/send-code/', template_views.SendCodeView.as_view(), name='send_code'),
     path('register/verify/', template_views.VerifyEmailView.as_view(), name='verify_phone'),
+    path('create-admin/', template_views.CreateAdminView.as_view(), name='create_admin'),
     path('profile/', template_views.ProfileView.as_view(), name='profile'),
     path('profile/edit/', template_views.EditProfileView.as_view(), name='edit_profile'),
     path('users/<int:pk>/', template_views.UserDetailView.as_view(), name='user_detail')

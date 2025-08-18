@@ -6,7 +6,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.templatetags.static import static
 
 from apps.core.models import BaseModel
@@ -79,8 +78,6 @@ class UserProfileModel(BaseModel):
 
     user = models.OneToOneField(User, verbose_name=_('User'), on_delete=models.CASCADE, related_name='profile')
     phone_number = models.CharField(_('Phone number'), max_length=11)
-    national_id = models.CharField(_('National id'), max_length=11, unique=True,
-                                   validators=[MinLengthValidator(9), MaxLengthValidator(11)])
     gender = models.CharField(_('Gender'), max_length=10, choices=Gender.choices, null=True, blank=True)
     bio = models.TextField(_('Bio'), blank=True, null=True)
     image = models.ImageField(_('Picture'), upload_to='images/profiles/', null=True, blank=True)

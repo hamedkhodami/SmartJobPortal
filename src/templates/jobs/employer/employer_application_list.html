@@ -1,0 +1,55 @@
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "Received Applications" %}
+{% endblock %}
+
+{% block content %}
+  <h2>{% trans "Received Applications" %}</h2>
+
+  {% if applications %}
+    <ul>
+      {% for app in applications %}
+        <li>
+          <strong>{{ app.seeker.get_full_name }} ({{ app.seeker.email }})</strong><br>
+          {% trans "Job" %}: {{ app.job.title }}<br>
+          {% trans "Status" %}: {{ app.get_status_display }}<br>
+          {% if app.cover_letter %}
+            <details>
+              <summary>{% trans "Cover Letter" %}</summary>
+              <p>{{ app.cover_letter|linebreaks }}</p>
+            </details>
+          {% endif %}
+          {% if app.has_resume %}
+            <a href="{{ app.resume.url }}" target="_blank">{% trans "Download Resume" %}</a>
+          {% endif %}
+        </li>
+        <hr>
+        <form method="post" action="{% url 'job:application_approve' app.pk %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-sm btn-success">{% trans "Approve" %}</button>
+        </form>
+
+        <form method="post" action="{% url 'job:application_reject' app.pk %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-sm btn-danger">{% trans "Reject" %}</button>
+        </form>
+      {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+        {% endif %}
+        <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% else %}
+    <p>{% trans "No applications received yet." %}</p>
+  {% endif %}
+{% endblock %}

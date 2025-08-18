@@ -1,0 +1,15 @@
+{# templates/jobs/job_apply.html #}
+{% load i18n %}
+{% block title %}{{ job.title }} - {% trans "Apply" %}{% endblock %}
+
+{% block content %}
+  <h2>{% trans "Apply for" %} {{ job.title }}</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% trans "Submit Application" %}</button>
+  </form>
+
+  <a href="{% url 'job:job_detail' job.pk %}">{% trans "Back to job details" %}</a>
+{% endblock %}
