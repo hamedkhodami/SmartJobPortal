@@ -7,34 +7,100 @@
 {% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h2 class="mb-4 text-center">{% trans "User Registration" %}</h2>
+<div class="relative bg-accountForm shadow-2xl rounded-3xl px-10 py-8 w-full max-w-3xl mx-auto">
+    <!-- Decorative Background -->
+    <div class="absolute -top-8 -right-8 w-24 h-24 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
 
-    <form method="post" novalidate>
+    <h2 class="text-3xl font-extrabold text-center mb-8 text-gray-800">{% trans "User Registration" %}</h2>
+
+    <form method="post" action="{% url 'account:register' %}" class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
         {% csrf_token %}
-        {% for field in form %}
-            <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">
-                    {% trans field.label %}
-                </label>
-                {{ field }}
-                {% if field.errors %}
-                    <div class="text-danger small">
-                        {{ field.errors|striptags }}
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
 
+        <!-- Email -->
+        <div class="col-span-1">
+            <label for="email" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "Email" %}</label>
+            <input type="email" id="email" name="email"
+                   value="{{ form.email.value|default_if_none:'' }}"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            {% if form.email.errors %}
+                <p class="mt-1 text-sm text-errorRed">{{ form.email.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Role -->
+        <div class="col-span-1">
+            <label for="role" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "Role" %}</label>
+            {{ form.role }}
+            {% if form.role.errors %}
+                <p class="mt-1 text-sm text-errorRed">{{ form.role.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- First Name -->
+        <div class="col-span-1">
+            <label for="first_name" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "First name" %}</label>
+            <input type="text" id="first_name" name="first_name"
+                   value="{{ form.first_name.value|default_if_none:'' }}"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            {% if form.first_name.errors %}
+                <p class="mt-1 text-sm text-errorRed">{{ form.first_name.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-span-1">
+            <label for="last_name" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "Last name" %}</label>
+            <input type="text" id="last_name" name="last_name"
+                   value="{{ form.last_name.value|default_if_none:'' }}"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            {% if form.last_name.errors %}
+                <p class="mt-1 text-sm text-errorRed">{{ form.last_name.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Password -->
+        <div class="col-span-1">
+            <label for="password" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "Password" %}</label>
+            <input type="password" id="password" name="password"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            {% if form.password.errors %}
+                <p class="mt-1 text-sm text-errorRed">{{ form.password.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="col-span-1">
+            <label for="confirm_password" class="block text-sm font-semibold text-gray-600 mb-2">{% trans "Confirm Password" %}</label>
+            <input type="password" id="confirm_password" name="confirm_password"
+                   class="w-full px-5 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-indigo-400 shadow-sm">
+            {% if form.confirm_password.errors %}
+                <p class="mt-1 text-sm text-errorRed">{{ form.confirm_password.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Non-field Errors -->
         {% if form.non_field_errors %}
-            <div class="alert alert-danger">
+            <div class="col-span-2 p-3 bg-red-100 text-red-700 rounded-md text-sm">
                 {{ form.non_field_errors }}
             </div>
         {% endif %}
 
-        <button type="submit" class="btn btn-primary w-100">
-            {% trans "Register" %}
-        </button>
+        <!-- Submit Button -->
+        <div class="col-span-2">
+            <button type="submit"
+                    class="w-full bg-indigo-600 text-white py-3 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-purple-300">
+                {% trans "Register" %}
+            </button>
+        </div>
+
+        <!-- Login Redirect -->
+        <div class="col-span-2 text-center mt-4">
+            <a href="{% url 'account:login' %}"
+               class="inline-block text-sm text-gray-600 font-semibold hover:text-indigo-600 hover:underline transition">
+                {% trans "Already have an account? Login" %}
+            </a>
+        </div>
     </form>
 </div>
 {% endblock %}

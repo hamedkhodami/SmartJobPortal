@@ -1,3 +1,4 @@
+{% extends "base/base.html" %}
 {% load i18n %}
 {% load static %}
 
@@ -6,49 +7,135 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h4 class="mb-4">{% trans "Edit Your Profile" %}</h4>
+<div class="px-4 py-10 md:pr-72">
+    <div class="bg-accountForm shadow-xl rounded-3xl max-w-5xl mx-auto p-8 relative overflow-hidden">
 
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.non_field_errors }}
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
 
-                <div class="mb-3">
-                    <label for="first_name" class="form-label">{% trans "First Name" %}</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control"
-                           value="{{ request.user.first_name }}">
-                </div>
+        <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">{% trans "Edit Your Profile" %}</h2>
 
-                <div class="mb-3">
-                    <label for="last_name" class="form-label">{% trans "Last Name" %}</label>
-                    <input type="text" name="last_name" id="last_name" class="form-control"
-                           value="{{ request.user.last_name }}">
-                </div>
+        <form method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
 
-                {% for field in form %}
-                    <div class="mb-3">
-                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                        {{ field }}
-                        {% if field.errors %}
-                            <div class="text-danger small">
-                                {{ field.errors|striptags }}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+            <!-- First Name -->
+            <div>
+                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">{% trans "First Name" %}</label>
+                <input type="text" name="first_name" id="first_name"
+                       value="{{ request.user.first_name }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm  text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
 
-                <div class="mt-4 d-flex justify-content-between">
-                    <a href="{% url 'account:profile' %}" class="btn btn-secondary">
-                        {% trans "Cancel" %}
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        {% trans "Save Changes" %}
-                    </button>
-                </div>
-            </form>
-        </div>
+            <!-- Last Name -->
+            <div>
+                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Last Name" %}</label>
+                <input type="text" name="last_name" id="last_name"
+                       value="{{ request.user.last_name }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <!-- Phone Number -->
+            <div class="md:col-span-2">
+                <label for="{{ form.phone_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.phone_number.label }}
+                </label>
+                <input type="text" name="phone_number" id="phone_number"
+                       value="{{ request.user.profile.phone_number }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                {% if form.phone_number.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.phone_number.errors|striptags }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.gender.label }}
+                </label>
+                <select name="gender" id="gender"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    {% for value, label in form.fields.gender.choices %}
+                        <option value="{{ value }}" {% if request.user.profile.gender == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.gender.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.gender.errors|striptags }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Degree -->
+            <div>
+                <label for="degree" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.degree.label }}
+                </label>
+                <input type="text" name="degree" id="degree"
+                       value="{{ request.user.profile.degree }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                {% if form.degree.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.degree.errors|striptags }}</p>
+                {% endif %}
+            </div>
+
+            <!-- City -->
+            <div>
+                <label for="city" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.city.label }}
+                </label>
+                <input type="text" name="city" id="city"
+                       value="{{ request.user.profile.city }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                {% if form.city.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.city.errors|striptags }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Skills -->
+            <div class="md:col-span-2">
+                <label for="skills" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.skills.label }}
+                </label>
+                <textarea name="skills" id="skills" rows="3"
+                          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm resize-none bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ request.user.profile.skills }}</textarea>
+                {% if form.skills.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.skills.errors|striptags }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Biography -->
+            <div class="md:col-span-2">
+                <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.bio.label }}
+                </label>
+                <textarea name="bio" id="bio" rows="3"
+                          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm resize-none bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ request.user.profile.bio }}</textarea>
+                {% if form.bio.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.bio.errors|striptags }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Profile Image -->
+            <div class="md:col-span-2">
+                <label for="image" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.image.label }}
+                </label>
+                <input type="file" name="image" id="image"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 file:bg-indigo-100 file:border-none file:rounded file:px-4 file:py-2 file:text-indigo-700">
+                {% if form.image.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.image.errors|striptags }}</p>
+                {% endif %}
+            </div>
+
+            <div class="md:col-span-2 flex flex-col sm:flex-row justify-between items-center gap-4 pt-6">
+                <a href="{% url 'account:profile' %}"
+                   class="bg-errorRed flex items-center gap-2 px-6 py-2 rounded-full border border-gray-400 text-gray-600 font-semibold transition">
+                    <i class="fas fa-arrow-left"></i> {% trans "Cancel" %}
+                </a>
+                <button type="submit"
+                        class="flex items-center gap-2 px-6 py-2 rounded-full bg-indigo-600 text-white font-semibold hover:bg-indigo-500 transition">
+                    <i class="fas fa-save"></i> {% trans "Save Changes" %}
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

@@ -1,24 +1,93 @@
+{% extends "base/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Admin Dashboard" %}{% endblock %}
+
+{% block title %}
+  {% trans "Admin Dashboard" %}
+{% endblock %}
 
 {% block content %}
-  <h2 class="mb-3">{% trans "Welcome" %} {{ user.full_name }}</h2>
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-6xl mx-auto p-10 relative overflow-hidden">
 
-  <div class="mb-4">
-    <p>{% trans "Pending jobs" %}: {{ pending_jobs }}</p>
-    <p>{% trans "Active jobs" %}: {{ active_jobs }}</p>
-    <p>{% trans "Total users" %}: {{ users_count }}</p>
-    <p>{% trans "Total applications" %}: {{ applications_count }}</p>
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-yellow-300 rounded-full blur-3xl opacity-30"></div>
+
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">
+      {% trans "Welcome" %} {{ user.full_name }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      <div class="bg-white rounded-xl shadow-md p-4 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-clock text-yellow-600 text-2xl"></i>
+        <div>
+          <p class="text-xs text-gray-500">{% trans "Pending Jobs" %}</p>
+          <h3 class="text-lg font-bold text-gray-800 counter" data-count="{{ pending_jobs }}">0</h3>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-4 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+        <div>
+          <p class="text-xs text-gray-500">{% trans "Active Jobs" %}</p>
+          <h3 class="text-lg font-bold text-gray-800 counter" data-count="{{ active_jobs }}">0</h3>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-4 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-users text-indigo-600 text-2xl"></i>
+        <div>
+          <p class="text-xs text-gray-500">{% trans "Total Users" %}</p>
+          <h3 class="text-lg font-bold text-gray-800 counter" data-count="{{ users_count }}">0</h3>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-4 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-file-alt text-pink-600 text-2xl"></i>
+        <div>
+          <p class="text-xs text-gray-500">{% trans "Total Applications" %}</p>
+          <h3 class="text-lg font-bold text-gray-800 counter" data-count="{{ applications_count }}">0</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm font-medium">
+      <a href="{% url 'job:create' %}"
+         class="bg-green-600 text-white px-6 py-4 rounded-xl hover:bg-green-500 transition flex items-center gap-3">
+        <i class="fas fa-plus-circle"></i> {% trans "Create Job" %}
+      </a>
+
+      <a href="{% url 'account:create_admin' %}"
+         class="bg-yellow-500 text-white px-6 py-4 rounded-xl hover:bg-yellow-400 transition flex items-center gap-3">
+        <i class="fas fa-user-shield"></i> {% trans "Create New Admin" %}
+      </a>
+
+      <a href="{% url 'account:block_list' %}"
+         class="bg-red-600 text-white px-6 py-4 rounded-xl hover:bg-red-500 transition flex items-center gap-3">
+        <i class="fas fa-ban"></i> {% trans "Block a User" %}
+      </a>
+
+      <a href="{% url 'account:user_list' %}"
+         class="bg-indigo-600 text-white px-6 py-4 rounded-xl hover:bg-indigo-500 transition flex items-center gap-3">
+        <i class="fas fa-users"></i> {% trans "All Users" %}
+      </a>
+
+      <a href="{% url 'job:job_list' %}"
+         class="bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-blue-500 transition flex items-center gap-3">
+        <i class="fas fa-list"></i> {% trans "All Jobs" %}
+      </a>
+
+      <a href="{% url 'account:profile' %}"
+         class="bg-gray-200 text-gray-800 px-6 py-4 rounded-xl hover:bg-gray-300 transition flex items-center gap-3">
+        <i class="fas fa-cog"></i> {% trans "Profile Settings" %}
+      </a>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="{% url 'account:logout' %}"
+         class="inline-block px-6 py-3 bg-black text-white rounded-full font-semibold text-sm hover:bg-gray-800 transition">
+        <i class="fas fa-sign-out-alt"></i> {% trans "Logout" %}
+      </a>
+    </div>
   </div>
-
-  <div class="mb-4">
-    <a href="{% url 'job:create' %}" class="btn btn-success mb-2">➕ {% trans "Create Job" %}</a><br>
-    <a href="{% url 'account:create_admin' %}" class="btn btn-warning mb-2">🛡️ {% trans "Create New Admin" %}</a><br>
-    <a href="{% url 'account:block_list' %}" class="btn btn-danger mb-2">🚫 {% trans "Block a User" %}</a><br>
-    <a href="{% url 'account:user_list' %}" class="btn btn-outline-primary mb-2">👥 {% trans "All Users" %}</a><br>
-    <a href="{% url 'job:job_list' %}" class="btn btn-outline-info mb-2">📋 {% trans "All Jobs" %}</a><br>
-
-    <a href="{% url 'account:profile' %}">⚙️ {% trans "Profile Settings" %}</a><br>
-    <a href="{% url 'account:logout' %}" class="btn btn-dark mt-3">🚪 {% trans "Logout" %}</a>
-  </div>
+</div>
 {% endblock %}

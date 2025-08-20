@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from apps.core.validators import OnlyPersianCharsValidator
 from .models import User, UserProfileModel
-from .enums import UserGenderEnum, UserRoleEnum
+from .enums import UserRoleEnum
 
 
 class LoginForm(forms.Form):

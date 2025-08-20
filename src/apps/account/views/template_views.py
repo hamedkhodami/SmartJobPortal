@@ -91,7 +91,7 @@ class SendCodeView(LogoutRequiredMixin, View):
 
 
 class VerifyEmailView(LogoutRequiredMixin, FormView):
-    template_name = 'account/verify_email.html'
+    template_name = 'account/password/verify_email.html'
     form_class = VerifyEmailForm
     success_url = reverse_lazy('')
 
@@ -225,6 +225,16 @@ class ProfileView(LoginRequiredMixin, DetailView):
         return self.request.user.profile
 
 
+class PublicProfileView(LoginRequiredMixin, DetailView):
+    model = UserProfileModel
+    template_name = 'account/public_profile.html'
+    context_object_name = 'profile'
+
+    def get_object(self):
+        profile_id = self.kwargs.get('pk')
+        return get_object_or_404(UserProfileModel, pk=profile_id)
+
+
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = UserProfileModel
     form_class = EditProfileForm
@@ -248,13 +258,24 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 
 
 class UserListView(LoginRequiredMixin, AccessRequiredMixin, ListView):
-    template_name = 'account/user_list.html'
     model = User
+    template_name = 'account/user_list.html'
+    context_object_name = 'users'
     roles = ['admin']
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
-        return User.objects.filter(userblock__isnull=True).order_by('-created_at')
+        queryset = User.objects.filter(userblock__isnull=True).order_by('-created_at')
+        search = self.request.GET.get('q')
+        if search:
+            queryset = queryset.filter(email__icontains=search)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = _("User List")
+        context['search_query'] = self.request.GET.get('q', '')
+        return context
 
 
 class BlockUserView(LoginRequiredMixin, AccessRequiredMixin, View):
@@ -284,10 +305,21 @@ class UserBlockListView(LoginRequiredMixin, AccessRequiredMixin, ListView):
     template_name = 'account/block_list.html'
     model = User
     roles = ['admin']
+    context_object_name = 'users'
     paginate_by = 10
 
     def get_queryset(self):
-        return User.objects.filter(userblock__isnull=False).order_by('-created_at')
+        queryset = User.objects.filter(userblock__isnull=False).order_by('-created_at')
+        search = self.request.GET.get('q')
+        if search:
+            queryset = queryset.filter(email__icontains=search)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = _("User List")
+        context['search_query'] = self.request.GET.get('q', '')
+        return context
 
 
 class UnBlockUserView(LoginRequiredMixin, AccessRequiredMixin, View):

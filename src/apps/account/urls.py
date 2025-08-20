@@ -31,6 +31,7 @@ urlpatterns = [
     path('register/verify/', template_views.VerifyEmailView.as_view(), name='verify_phone'),
     path('create-admin/', template_views.CreateAdminView.as_view(), name='create_admin'),
     path('profile/', template_views.ProfileView.as_view(), name='profile'),
+    path('profile/<int:pk>/', template_views.PublicProfileView.as_view(), name='public_profile'),
     path('profile/edit/', template_views.EditProfileView.as_view(), name='edit_profile'),
     path('users/', template_views.UserListView.as_view(), name='user_list'),
     path('blocklist/', template_views.UserBlockListView.as_view(), name='block_list'),

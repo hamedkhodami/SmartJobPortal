@@ -54,6 +54,14 @@
             </button>
         </form>
 
+        <!-- Register Redirect Button -->
+        <div class="mt-4 text-center">
+            <a href="{% url 'account:register' %}"
+               class="inline-block text-sm text-gray-600 font-semibold hover:text-indigo-600 hover:underline transition">
+                {% trans "Don't have an account? Register" %}
+            </a>
+        </div>
+
         <!-- Forgot Password Link -->
         <div class="mt-6 text-center">
             <a href="{% url 'account:get_phone_number' %}" class="text-sm text-indigo-600 font-semibold hover:text-indigo-500 hover:underline">{% trans "forget password" %}</a>

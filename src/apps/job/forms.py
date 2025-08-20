@@ -43,13 +43,3 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = ApplicationModel
         fields = ['cover_letter', 'resume']
-        widgets = {
-            'cover_letter': forms.Textarea(attrs={'rows': 4}),
-        }
-        labels = {
-            'cover_letter': _('Cover Letter'),
-            'resume': _('Resume'),
-        }
-        help_texts = {
-            'resume': _('Optional – PDF or DOCX preferred.'),
-        }

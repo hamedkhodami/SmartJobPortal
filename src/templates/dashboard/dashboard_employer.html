@@ -1,17 +1,85 @@
+{% extends "base/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Dashboard" %}{% endblock %}
+
+{% block title %}
+  {% trans "Employer Dashboard" %}
+{% endblock %}
 
 {% block content %}
-  <h2 class="mb-3">{% trans "Welcome" %} {{ user.full_name }}</h2>
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-6xl mx-auto p-10 relative overflow-hidden">
 
-  <p>{% trans "Jobs posted" %}: {{ jobs_count }}</p>
-  <p>{% trans "Total applications" %}: {{ applications_count }}</p>
-  <p>{% trans "Accepted applications" %}: {{ accepted_count }}</p>
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
 
-  <a href="{% url 'job:create' %}" class="btn btn-success mb-2">➕ {% trans "Create new Job" %}</a><br>
-  <a href="{% url 'job:employer-job-list' %}" class="btn btn-outline-primary mb-2">📋 {% trans "My Jobs" %}</a><br>
-  <a href="{% url 'job:employer_applications' %}" class="btn btn-outline-info mb-2">📩 {% trans "Applications" %}</a><br>
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">
+      {% trans "Welcome" %} {{ user.full_name }}
+    </h2>
 
-  <a href="{% url 'account:profile' %}">⚙️ {% trans "Profile Settings" %}</a><br>
-  <a href="{% url 'account:logout' %}" class="btn btn-danger mt-3">🚪 {% trans "Logout" %}</a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-briefcase text-indigo-600 text-3xl"></i>
+        <div>
+          <p class="text-sm text-gray-500">{% trans "Jobs Posted" %}</p>
+          <h3 class="text-xl font-bold text-gray-800 counter" data-count="{{ jobs_count }}">0</h3>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-file-alt text-green-600 text-3xl"></i>
+        <div>
+          <p class="text-sm text-gray-500">{% trans "Total Applications" %}</p>
+          <h3 class="text-xl font-bold text-gray-800 counter" data-count="{{ applications_count }}">0</h3>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-check-circle text-pink-600 text-3xl"></i>
+        <div>
+          <p class="text-sm text-gray-500">{% trans "Accepted Applications" %}</p>
+          <h3 class="text-xl font-bold text-gray-800 counter" data-count="{{ accepted_count }}">0</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm font-medium">
+      <a href="{% url 'job:job_list' %}"
+         class="bg-indigo-600 text-white px-6 py-4 rounded-xl hover:bg-indigo-500 transition flex items-center gap-3">
+        <i class="fas fa-list"></i> {% trans "All Jobs" %}
+      </a>
+
+      <a href="{% url 'job:create' %}"
+         class="bg-green-600 text-white px-6 py-4 rounded-xl hover:bg-green-500 transition flex items-center gap-3">
+        <i class="fas fa-plus-circle"></i> {% trans "Create New Job" %}
+      </a>
+
+      <a href="{% url 'job:employer-job-list' %}"
+         class="bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-purple-500 transition flex items-center gap-3">
+        <i class="fas fa-user-tie"></i> {% trans "My Jobs" %}
+      </a>
+
+      <a href="{% url 'job:employer_applications' %}"
+         class="bg-yellow-500 text-white px-6 py-4 rounded-xl hover:bg-yellow-400 transition flex items-center gap-3">
+        <i class="fas fa-envelope-open-text"></i> {% trans "Applications" %}
+      </a>
+
+      <a href="{% url 'job:employer_accepted_jobs' %}"
+         class="bg-pink-500 text-white px-6 py-4 rounded-xl hover:bg-pink-400 transition flex items-center gap-3">
+        <i class="fas fa-thumbs-up"></i> {% trans "Accepted Applications" %}
+      </a>
+
+      <a href="{% url 'account:profile' %}"
+         class="bg-gray-200 text-gray-800 px-6 py-4 rounded-xl hover:bg-gray-300 transition flex items-center gap-3">
+        <i class="fas fa-cog"></i> {% trans "Profile Settings" %}
+      </a>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="{% url 'account:logout' %}"
+         class="inline-block px-6 py-3 bg-red-600 text-white rounded-full font-semibold text-sm hover:bg-red-500 transition">
+        <i class="fas fa-sign-out-alt"></i> {% trans "Logout" %}
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}

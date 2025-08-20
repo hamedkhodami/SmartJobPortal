@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.templatetags.static import static
+from django.shortcuts import reverse
 
 from apps.core.models import BaseModel
 from apps.core.validators import OnlyPersianCharsValidator
@@ -96,6 +97,9 @@ class UserProfileModel(BaseModel):
         if self.image:
             return self.image.url
         return static('images/default/user.jpg')
+
+    def get_absolute_url(self):
+        return reverse('account:public_profile', args=[self.pk])
 
 
 class UserBlock(BaseModel):

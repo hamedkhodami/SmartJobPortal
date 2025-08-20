@@ -1,31 +1,65 @@
+{% extends "base/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "My Applications" %}{% endblock %}
+
+{% block title %}
+  {% trans "My Applications" %}
+{% endblock %}
 
 {% block content %}
-  <h2>{% trans "My Applications" %}</h2>
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-5xl mx-auto p-8 relative overflow-hidden">
 
-  {% if applications %}
-    <ul>
-      {% for app in applications %}
-        <li style="margin-bottom: 1em;">
-          <strong>{{ app.job.title }}</strong> – {{ app.job.location }}
-          <br>
-          <small>{% trans "Status" %}: {{ app.get_status_display }}</small>
-          <br>
-          {% if app.status == 'submitted' %}
-            <form method="post" action="{% url 'job:cancel_application' app.pk %}" style="margin-top: 5px;">
-              {% csrf_token %}
-              <button type="submit" onclick="return confirm('{% trans "Are you sure you want to cancel this application?" %}')">
-                {% trans "Cancel Application" %}
-              </button>
-            </form>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>{% trans "You haven't applied for any jobs yet." %}</p>
-  {% endif %}
+    <!-- تزئینات بلوری -->
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
 
-  <a href="{% url 'job:job_list' %}">{% trans "Back to job listings" %}</a>
+    <!-- عنوان -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+      {% trans "My Applications" %}
+    </h2>
+
+    {% if applications %}
+      <ul class="space-y-6">
+        {% for app in applications %}
+          <li class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-lg font-semibold text-gray-800">{{ app.job.title }}</h3>
+              <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">
+                {{ app.job.location }}
+              </span>
+            </div>
+
+            <p class="text-sm text-gray-600">
+              {% trans "Status" %}:
+              <span class="font-medium text-gray-800">{{ app.get_status_display }}</span>
+            </p>
+
+            {% if app.status == 'submitted' %}
+              <form method="post" action="{% url 'job:cancel_application' app.pk %}" class="mt-4">
+                {% csrf_token %}
+                <button type="submit"
+                        onclick="return confirm('{% trans 'Are you sure you want to cancel this application?' %}')"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-500 transition">
+                  {% trans "Cancel Application" %}
+                </button>
+              </form>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-center text-gray-500 mt-6">
+        {% trans "You haven't applied for any jobs yet." %}
+      </p>
+    {% endif %}
+
+    <!-- لینک بازگشت -->
+    <div class="mt-8 text-center">
+      <a href="{% url 'job:job_list' %}"
+         class="text-indigo-600 hover:underline text-sm font-medium">
+        ← {% trans "Back to job listings" %}
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}

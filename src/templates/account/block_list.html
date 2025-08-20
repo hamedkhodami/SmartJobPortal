@@ -1,36 +1,105 @@
+{% extends "base/base.html" %}
 {% load i18n %}
-<h2>{% trans "User BlockList" %}</h2>
+{% load static %}
 
-{% if object_list %}
-  <table>
-    <thead>
-      <tr>
-        <th>{% trans "Full Name" %}</th>
-        <th>{% trans "Email" %}</th>
-        <th>{% trans "Role" %}</th>
-        <th>{% trans "Actions" %}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for user in object_list %}
-        <tr>
-          <td>{{ user.full_name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.get_role_display }}</td>
-          <td>
-            <form method="post" action="{% url 'account:unblock_user' user.pk %}" style="display:inline;">
-              {% csrf_token %}
-              <button type="submit" onclick="return confirm('{% trans "UnBlock this user?" %}')">🚫 {% trans "UnBlock" %}</button>
-            </form>
-            <form method="post" action="{% url 'account:delete_user' user.pk %}" style="display:inline;">
-              {% csrf_token %}
-              <button type="submit" onclick="return confirm('{% trans "Delete this user?" %}')">🗑️ {% trans "Delete" %}</button>
-            </form>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>{% trans "No users found." %}</p>
-{% endif %}
+{% block title %}
+  {{ page_title }}
+{% endblock %}
+
+{% block content %}
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-5xl mx-auto p-8 relative overflow-hidden">
+
+    <!-- تزئینات پس‌زمینه -->
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+    <!-- عنوان -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">{% trans "Blocked Users" %}</h2>
+
+    <!-- فرم جستجو -->
+    <form method="get" class="mb-6 flex items-center gap-2">
+      <input type="text" name="q" value="{{ search_query }}"
+             placeholder="{% trans 'Search by email...' %}"
+             class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm w-full max-w-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <button type="submit"
+              class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-500 transition">
+        {% trans "Search" %}
+      </button>
+    </form>
+
+    {% if users %}
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+          <thead class="bg-gray-100 text-gray-700 font-semibold">
+            <tr>
+              <th class="px-4 py-3">{% trans "Full Name" %}</th>
+              <th class="px-4 py-3">{% trans "Email" %}</th>
+              <th class="px-4 py-3">{% trans "Role" %}</th>
+              <th class="px-4 py-3 text-center">{% trans "Actions" %}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {% for user in users %}
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-4 py-3 text-gray-800">{{ user.full_name }}</td>
+                <td class="px-4 py-3 text-gray-600">{{ user.email }}</td>
+                <td class="px-4 py-3 text-gray-600">{{ user.get_role_display }}</td>
+                <td class="px-4 py-3 text-center space-x-2">
+                  <!-- Unblock Button -->
+                  <form method="post" action="{% url 'account:unblock_user' user.pk %}" class="inline-block">
+                    {% csrf_token %}
+                    <button type="submit"
+                            onclick="return confirm('{% trans "Unblock this user?" %}')"
+                            class="px-3 py-1 rounded-full bg-green-600 text-white hover:bg-green-500 transition text-xs font-medium"
+                            aria-label="{% trans 'Unblock user' %}">
+                      ✅ {% trans "Unblock" %}
+                    </button>
+                  </form>
+
+                  <!-- Delete Button -->
+                  <form method="post" action="{% url 'account:delete_user' user.pk %}" class="inline-block">
+                    {% csrf_token %}
+                    <button type="submit"
+                            onclick="return confirm('{% trans "Delete this user?" %}')"
+                            class="px-3 py-1 rounded-full bg-red-600 text-white hover:bg-red-500 transition text-xs font-medium"
+                            aria-label="{% trans 'Delete user' %}">
+                      🗑️ {% trans "Delete" %}
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- صفحه‌بندی -->
+      {% if is_paginated %}
+        <div class="mt-8 flex justify-center items-center gap-2 text-sm">
+          {% if page_obj.has_previous %}
+            <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              ← {% trans "Previous" %}
+            </a>
+          {% endif %}
+
+          <span class="px-3 py-1 text-gray-600">
+            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
+          </span>
+
+          {% if page_obj.has_next %}
+            <a href="?q={{ search_query }}&page={{ page_obj.next_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              {% trans "Next" %} →
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% else %}
+      <p class="text-center text-gray-500 mt-6">{% trans "No blocked users found." %}</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

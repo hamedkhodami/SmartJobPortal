@@ -1,16 +1,75 @@
+{% extends "base/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Dashboard" %}{% endblock %}
+
+{% block title %}
+  {% trans "JobSeeker Dashboard" %}
+{% endblock %}
 
 {% block content %}
-  <h2 class="mb-3">{% trans "Welcome" %} {{ user.full_name }}</h2>
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-6xl mx-auto p-10 relative overflow-hidden">
 
-  <p>{% trans "Applied jobs" %}: {{ applied_count }}</p>
-  <p>{% trans "Accepted" %}: {{ accepted_count }} | {% trans "Rejected" %}: {{ rejected_count }}</p>
+    <!-- تزئینات بلوری -->
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-green-300 rounded-full blur-3xl opacity-30"></div>
 
-  <a href="{% url 'job:job_list' %}">🔍 {% trans "Browse Jobs" %}</a><br>
-  <a href="{% url 'job:my_applications' %}">📩 {% trans "My Applications" %}</a><br>
+    <!-- خوش‌آمدگویی -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">
+      {% trans "Welcome" %} {{ user.full_name }}
+    </h2>
 
-  <a href="{% url 'account:profile' %}">⚙️ {% trans "Profile Settings" %}</a><br>
-  <a href="{% url 'account:logout' %}">🚪 {% trans "Logout" %}</a>
+    <!-- کارت‌های آماری -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-paper-plane text-indigo-600 text-3xl"></i>
+        <div>
+          <p class="text-sm text-gray-500">{% trans "Applied Jobs" %}</p>
+          <h3 class="text-xl font-bold text-gray-800 counter" data-count="{{ applied_count }}">0</h3>
+        </div>
+      </div>
 
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-check text-green-600 text-3xl"></i>
+        <div>
+          <p class="text-sm text-gray-500">{% trans "Accepted" %}</p>
+          <h3 class="text-xl font-bold text-gray-800 counter" data-count="{{ accepted_count }}">0</h3>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center gap-4 hover:shadow-lg transition">
+        <i class="fas fa-times text-red-500 text-3xl"></i>
+        <div>
+          <p class="text-sm text-gray-500">{% trans "Rejected" %}</p>
+          <h3 class="text-xl font-bold text-gray-800 counter" data-count="{{ rejected_count }}">0</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- لینک‌های مدیریتی -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm font-medium">
+      <a href="{% url 'job:job_list' %}"
+         class="bg-indigo-600 text-white px-6 py-4 rounded-xl hover:bg-indigo-500 transition flex items-center gap-3">
+        <i class="fas fa-search"></i> {% trans "Browse Jobs" %}
+      </a>
+
+      <a href="{% url 'job:my_applications' %}"
+         class="bg-yellow-500 text-white px-6 py-4 rounded-xl hover:bg-yellow-400 transition flex items-center gap-3">
+        <i class="fas fa-envelope"></i> {% trans "My Applications" %}
+      </a>
+
+      <a href="{% url 'account:profile' %}"
+         class="bg-gray-200 text-gray-800 px-6 py-4 rounded-xl hover:bg-gray-300 transition flex items-center gap-3">
+        <i class="fas fa-cog"></i> {% trans "Profile Settings" %}
+      </a>
+    </div>
+
+    <!-- خروج -->
+    <div class="mt-8 text-center">
+      <a href="{% url 'account:logout' %}"
+         class="inline-block px-6 py-3 bg-red-600 text-white rounded-full font-semibold text-sm hover:bg-red-500 transition">
+        <i class="fas fa-sign-out-alt"></i> {% trans "Logout" %}
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}

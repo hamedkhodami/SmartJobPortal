@@ -1,53 +1,88 @@
+{% extends "base/base.html" %}
 {% load i18n %}
 {% load static %}
 
 {% block title %}
-    {% trans "My Job Postings" %}
+  {% trans "My Job Postings" %}
 {% endblock %}
 
 {% block content %}
-  <h2>{% trans "My Job Postings" %}</h2>
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-5xl mx-auto p-8 relative overflow-hidden">
 
-  {% if jobs %}
-    <ul>
-      {% for job in jobs %}
-        <li>
-          <strong>{{ job.title }}</strong> —
-          {{ job.salary_range }} |
-          {% if job.is_active %}
-            {% trans "Active" %}
-          {% else %}
-            {% trans "Inactive" %}
+    <!-- تزئینات بلوری -->
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+    <!-- عنوان -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+      {% trans "My Job Postings" %}
+    </h2>
+
+    {% if jobs %}
+      <ul class="space-y-6">
+        {% for job in jobs %}
+          <li class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-lg font-semibold text-gray-800">{{ job.title }}</h3>
+              <span class="text-xs px-2 py-1 rounded-full
+                           {% if job.is_active %}
+                             bg-green-100 text-green-700
+                           {% else %}
+                             bg-red-100 text-red-700
+                           {% endif %}">
+                {% if job.is_active %}
+                  {% trans "Active" %}
+                {% else %}
+                  {% trans "Inactive" %}
+                {% endif %}
+              </span>
+            </div>
+
+            <p class="text-sm text-gray-600">{{ job.salary_range }}</p>
+
+            <div class="mt-4 flex gap-3">
+              <a href="{% url 'job:employer_job_edit' job.pk %}"
+                 class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-500 transition">
+                {% trans "Edit" %}
+              </a>
+
+              <a href="{% url 'job:employer_job_delete' job.pk %}"
+                 class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-500 transition">
+                {% trans "Delete" %}
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+
+      {% if is_paginated %}
+        <div class="mt-8 flex justify-center items-center gap-2 text-sm">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              ← {% trans "Previous" %}
+            </a>
           {% endif %}
 
-          <br>
+          <span class="px-3 py-1 text-gray-600">
+            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
+          </span>
 
-          <a href="{% url 'job:employer_job_edit' job.pk %}" class="btn btn-sm btn-outline-primary">
-            {% trans "Edit" %}
-          </a>
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              {% trans "Next" %} →
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
 
-          <a href="{% url 'job:employer_job_delete' job.pk %}" class="btn btn-sm btn-outline-danger">
-            {% trans "Delete" %}
-          </a>
-        </li>
-        <hr>
-      {% endfor %}
-    </ul>
-
-    {% if is_paginated %}
-      <div class="pagination">
-        {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
-        {% endif %}
-
-        <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
-
-        {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
-        {% endif %}
-      </div>
+    {% else %}
+      <p class="text-center text-gray-500 mt-6">
+        {% trans "You haven't posted any jobs yet." %}
+      </p>
     {% endif %}
-  {% else %}
-    <p>{% trans "You haven't posted any jobs yet." %}</p>
-  {% endif %}
+  </div>
+</div>
 {% endblock %}

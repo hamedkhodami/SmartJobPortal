@@ -31,10 +31,10 @@ urlpatterns_swagger = [
 ]
 
 urlpatterns_api = [
-    path('/', include('apps.public.urls', namespace='public')),
-    path('account/', include('apps.account.urls', namespace='account')),
+    path('public/', include('apps.public.urls', namespace='public')),
+    path('accounts/', include('apps.account.urls', namespace='account')),
     path('job/', include('apps.job.urls', namespace='job')),
-    path('dashboard/', include('apps.dashboard.urls', namespace='dashboard')),
+    path('', include('apps.dashboard.urls', namespace='dashboard')),
     path('notification/', include('apps.notification.urls', namespace='notification')),
 
 ]

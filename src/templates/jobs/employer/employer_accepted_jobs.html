@@ -1,36 +1,74 @@
+{% extends "base/base.html" %}
 {% load i18n %}
+
 {% block title %}
   {% trans "Accepted Jobs" %}
 {% endblock %}
 
 {% block content %}
-  <h2>{% trans "Accepted Jobs" %}</h2>
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-5xl mx-auto p-8 relative overflow-hidden">
 
-  {% if accepted_jobs %}
-    <ul>
-      {% for app in accepted_jobs %}
-        <li>
-          <strong>{{ app.job.title }}</strong><br>
-          {% trans "Taken by" %}: {{ app.seeker.get_full_name }} ({{ app.seeker.email }})<br>
-          {% trans "Location" %}: {{ app.job.location }}<br>
-          {% trans "Salary" %}: {{ app.job.salary_range }}
-        </li>
-        <hr>
-      {% endfor %}
-    </ul>
+    <!-- تزئینات بلوری -->
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
 
-    {% if is_paginated %}
-      <div class="pagination">
-        {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
-        {% endif %}
-        <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
-        {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
-        {% endif %}
-      </div>
+    <!-- عنوان -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+      {% trans "Accepted Jobs" %}
+    </h2>
+
+    {% if accepted_jobs %}
+      <ul class="space-y-6">
+        {% for app in accepted_jobs %}
+          <li class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-lg font-semibold text-gray-800">{{ app.job.title }}</h3>
+              <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                {% trans "Taken by" %}: {{ app.seeker.get_full_name }}
+              </span>
+            </div>
+
+            <p class="text-sm text-gray-600">
+              <span class="font-medium text-gray-800">{{ app.seeker.email }}</span>
+            </p>
+            <p class="text-sm text-gray-600 mt-1">
+              {% trans "Location" %}: <span class="font-medium text-gray-800">{{ app.job.location }}</span>
+            </p>
+            <p class="text-sm text-gray-600 mt-1">
+              {% trans "Salary" %}: <span class="font-medium text-gray-800">{{ app.job.salary_range }}</span>
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+
+      {% if is_paginated %}
+        <div class="mt-8 flex justify-center items-center gap-2 text-sm">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              ← {% trans "Previous" %}
+            </a>
+          {% endif %}
+
+          <span class="px-3 py-1 text-gray-600">
+            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
+          </span>
+
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              {% trans "Next" %} →
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% else %}
+      <p class="text-center text-gray-500 mt-6">
+        {% trans "No accepted jobs yet." %}
+      </p>
     {% endif %}
-  {% else %}
-    <p>{% trans "No accepted jobs yet." %}</p>
-  {% endif %}
+  </div>
+</div>
 {% endblock %}

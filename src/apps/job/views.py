@@ -26,12 +26,18 @@ class JobListView(LoginRequiredMixin, ListView):
         employment_type = self.request.GET.get('employment_type')
         if employment_type and employment_type != 'all':
             qs = qs.filter(employment_type=employment_type)
+
+        search = self.request.GET.get('q')
+        if search:
+            qs = qs.filter(title__icontains=search)
         return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['employment_type_selected'] = self.request.GET.get('employment_type', 'all')
         context['employment_type_choices'] = [('all', _('All'))] + list(JobModel.TYPE.choices)
+        context['page_title'] = _("Job List")
+        context['search_query'] = self.request.GET.get('q', '')
         return context
 
 
@@ -50,6 +56,7 @@ class JobDetailView(LoginRequiredMixin, DetailView):
 
         context['can_apply'] = getattr(user, 'role', None) != 'employer'
         context['has_applied'] = False
+        context['employer_profile'] = getattr(job.employer, 'profile', None)
 
         if user.is_authenticated and context['can_apply']:
             context['has_applied'] = job.applications.filter(seeker=user).exists()
@@ -160,6 +167,7 @@ class EmployerJobUpdateView(LoginRequiredMixin, JobEmployerRequiredMixin, Update
 class JobApplyView(LoginRequiredMixin, JobSeekerRequiredMixin, FormView):
     form_class = ApplicationForm
     template_name = 'jobs/seeker/job_apply.html'
+    success_url = reverse_lazy('dashboard:dashboard')
 
     def dispatch(self, request, *args, **kwargs):
         self.job = get_object_or_404(JobModel, pk=self.kwargs['pk'], is_approved=True, is_closed=False)

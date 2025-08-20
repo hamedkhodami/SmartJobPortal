@@ -1,0 +1,41 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ profile.user.full_name }}{% endblock %}
+
+{% block content %}
+<div class="px-4 py-10 md:pr-72">
+    <div class="bg-accountForm shadow-xl rounded-3xl max-w-5xl mx-auto p-8 relative overflow-hidden">
+
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-6 mb-10">
+            <img src="{{ profile.get_image_url }}" alt="{% trans 'Profile Image' %}"
+                 class="w-24 h-24 rounded-full object-cover border-4 border-indigo-300 shadow-md">
+            <div class="text-center sm:text-left">
+                <h2 class="text-3xl font-bold text-gray-800">{{ profile.user.full_name }}</h2>
+                <p class="text-sm text-gray-500">{{ profile.user.email }}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[15px] text-gray-700">
+            <div class="space-y-3">
+                <div><i class="fas fa-user mr-2 text-indigo-500"></i> <strong>{% trans "First Name" %}:</strong> {{ profile.user.first_name }}</div>
+                <div><i class="fas fa-user mr-2 text-indigo-500"></i> <strong>{% trans "Last Name" %}:</strong> {{ profile.user.last_name }}</div>
+                <div><i class="fas fa-phone mr-2 text-indigo-500"></i> <strong>{% trans "Phone Number" %}:</strong> {{ profile.phone_number }}</div>
+                <div><i class="fas fa-id-card mr-2 text-indigo-500"></i> <strong>{% trans "National ID" %}:</strong> {{ profile.national_id }}</div>
+                <div><i class="fas fa-venus-mars mr-2 text-indigo-500"></i> <strong>{% trans "Gender" %}:</strong> {{ profile.get_gender_display }}</div>
+                <div><i class="fas fa-graduation-cap mr-2 text-indigo-500"></i> <strong>{% trans "Degree" %}:</strong> {{ profile.degree }}</div>
+            </div>
+            <div class="space-y-3">
+                <div><i class="fas fa-map-marker-alt mr-2 text-indigo-500"></i> <strong>{% trans "City" %}:</strong> {{ profile.city }}</div>
+                <div><i class="fas fa-tools mr-2 text-indigo-500"></i> <strong>{% trans "Skills" %}:</strong> {{ profile.skills }}</div>
+                <div><i class="fas fa-align-left mr-2 text-indigo-500"></i> <strong>{% trans "Biography" %}:</strong> {{ profile.bio }}</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -163,7 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ---Auth user model---------------------------------------------
 AUTH_USER_MODEL = 'account.User'
 
-LOGIN_URL = '/u/login'
 
 LOGIN_OTP_CONFIG = {
     'TIMEOUT': 180,

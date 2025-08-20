@@ -1,0 +1,1119 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-20 13:50+0330\n"
+"PO-Revision-Date: 2025-08-20 14:30+0330\n"
+"Last-Translator: حامد حامدی <khodamihamed77@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.10.2\n"
+
+#: .\apps\account\apps.py:8 .\templates\base\header.html:30
+msgid "Account"
+msgstr "کاربر"
+
+#: .\apps\account\auth\authentication.py:14
+msgid "User in block list"
+msgstr "کاربر در لیست بلاک"
+
+#: .\apps\account\enums.py:7 .\apps\account\models.py:29
+msgid "Admin"
+msgstr "ادمین"
+
+#: .\apps\account\enums.py:8 .\apps\job\admin.py:33 .\apps\job\models.py:13
+#: .\templates\jobs\job_detail.html:22
+msgid "Employer"
+msgstr "کارفرما"
+
+#: .\apps\account\enums.py:9
+msgid "Job seeker"
+msgstr "کارجو"
+
+#: .\apps\account\enums.py:14
+msgid "Male"
+msgstr "مرد"
+
+#: .\apps\account\enums.py:15
+msgid "Female"
+msgstr "زن"
+
+#: .\apps\account\exceptions.py:8
+msgid "User not found"
+msgstr "کاربر پیدا شد"
+
+#: .\apps\account\exceptions.py:14
+msgid "Code already has been send"
+msgstr "کد قبلا ارسال شده است"
+
+#: .\apps\account\exceptions.py:20
+msgid "The code is wrong or timeout"
+msgstr "کد اشتباه است یا زمان آن تمام شده است"
+
+#: .\apps\account\exceptions.py:26
+msgid "User already has exited"
+msgstr "کاربر قبلاً خارج شده است"
+
+#: .\apps\account\forms.py:38 .\apps\account\forms.py:44
+msgid "Invalid email or password."
+msgstr "ایمیل یا رمز عبور نامعتبر است."
+
+#: .\apps\account\forms.py:41
+msgid "Your account has been blocked. Please contact support."
+msgstr "حساب شما مسدود شده است. لطفا با پشتیبانی تماس بگیرید."
+
+#: .\apps\account\forms.py:54 .\apps\account\models.py:22
+#: .\templates\account\block_list.html:37 .\templates\account\login.html:25
+#: .\templates\account\register.html:22 .\templates\account\user_list.html:34
+msgid "Email"
+msgstr "ایمیل"
+
+#: .\apps\account\forms.py:56 .\apps\account\models.py:23
+#: .\templates\account\register.html:42
+msgid "First name"
+msgstr "نام"
+
+#: .\apps\account\forms.py:62 .\apps\account\models.py:25
+#: .\templates\account\register.html:53
+msgid "Last name"
+msgstr "نام خانوادگی"
+
+#: .\apps\account\forms.py:68 .\apps\account\models.py:27
+#: .\templates\account\block_list.html:38 .\templates\account\register.html:33
+#: .\templates\account\user_list.html:35
+msgid "Role"
+msgstr "نقش"
+
+#: .\apps\account\forms.py:78 .\apps\account\forms.py:168
+#: .\templates\account\login.html:32
+#: .\templates\account\password\reset_pass_complete.html:21
+#: .\templates\account\register.html:64
+msgid "Password"
+msgstr "رمز"
+
+#: .\apps\account\forms.py:83 .\apps\account\forms.py:169
+#: .\templates\account\password\reset_pass_complete.html:36
+#: .\templates\account\register.html:74
+msgid "Confirm Password"
+msgstr "تایید رمز"
+
+#: .\apps\account\forms.py:91
+msgid "This email is already registered."
+msgstr "این ایمیل قبلاً ثبت شده است."
+
+#: .\apps\account\forms.py:100 .\apps\account\forms.py:180
+msgid "Passwords do not match."
+msgstr "رمزهای عبور مطابقت ندارند."
+
+#: .\apps\account\forms.py:112 .\apps\account\forms.py:113
+#: .\apps\account\models.py:24 .\apps\account\models.py:26
+#: .\apps\account\models.py:44
+msgid "No Name"
+msgstr "بدون نام"
+
+#: .\apps\account\forms.py:133 .\apps\account\views\template_views.py:84
+#: .\apps\account\views\template_views.py:171
+msgid "There is an issue! please try again"
+msgstr "مشکلی پیش آمده است! لطفا دوباره امتحان کنید"
+
+#: .\apps\account\forms.py:136
+msgid "Entered code is not correct"
+msgstr "کد وارد شده صحیح نیست"
+
+#: .\apps\account\forms.py:148
+msgid "No user found with this email"
+msgstr "کاربری با این ایمیل یافت نشد"
+
+#: .\apps\account\forms.py:162
+msgid "Passwords are not match."
+msgstr "رمزهای عبور مطابقت ندارند."
+
+#: .\apps\account\forms.py:206
+#: .\templates\account\password\forget_code.html:27
+#: .\templates\account\profile.html:29
+#: .\templates\account\public_profile.html:27
+msgid "Phone Number"
+msgstr "شماره تماس"
+
+#: .\apps\account\forms.py:207 .\apps\account\models.py:82
+#: .\templates\account\profile.html:31
+#: .\templates\account\public_profile.html:29
+msgid "Gender"
+msgstr "جنسیت"
+
+#: .\apps\account\forms.py:208 .\templates\account\profile.html:37
+#: .\templates\account\public_profile.html:35
+msgid "Biography"
+msgstr "بیوگرافی"
+
+#: .\apps\account\forms.py:209 .\templates\account\profile.html:17
+#: .\templates\account\public_profile.html:15
+msgid "Profile Image"
+msgstr "تصویر پروفایل"
+
+#: .\apps\account\forms.py:210 .\apps\account\models.py:85
+#: .\templates\account\profile.html:32
+#: .\templates\account\public_profile.html:30
+msgid "Degree"
+msgstr "مدرک"
+
+#: .\apps\account\forms.py:211 .\apps\account\models.py:86
+#: .\templates\account\profile.html:35
+#: .\templates\account\public_profile.html:33
+msgid "City"
+msgstr "شهر"
+
+#: .\apps\account\forms.py:212 .\apps\account\models.py:87
+#: .\templates\account\profile.html:36
+#: .\templates\account\public_profile.html:34
+msgid "Skills"
+msgstr "مهارت ها"
+
+#: .\apps\account\forms.py:216
+msgid "Phone number must not exceed 11 digits."
+msgstr "شماره تلفن نباید از 11 رقم بیشتر باشد."
+
+#: .\apps\account\managers.py:17
+msgid "Users must have a email!"
+msgstr "کاربران باید ایمیل داشته باشند!"
+
+#: .\apps\account\mixins.py:20 .\apps\job\mixins.py:10 .\apps\job\mixins.py:18
+msgid "You do not have permission to this work."
+msgstr "شما اجازه این کار را ندارید."
+
+#: .\apps\account\models.py:28
+#: .\templates\jobs\employer\employer_job_list.html:35
+msgid "Active"
+msgstr "فعال"
+
+#: .\apps\account\models.py:30
+msgid "Verify"
+msgstr "تایید"
+
+#: .\apps\account\models.py:31
+msgid "Secret token"
+msgstr "توکن مخفی"
+
+#: .\apps\account\models.py:37 .\apps\account\models.py:80
+msgid "User"
+msgstr "کاربر"
+
+#: .\apps\account\models.py:38
+msgid "Users"
+msgstr "کاربران"
+
+#: .\apps\account\models.py:81
+msgid "Phone number"
+msgstr "شماره تماس"
+
+#: .\apps\account\models.py:83
+msgid "Bio"
+msgstr "بیوگرافی"
+
+#: .\apps\account\models.py:84
+msgid "Picture"
+msgstr "تصویر"
+
+#: .\apps\account\models.py:90
+msgid "User profile"
+msgstr "تصویر پروفایل"
+
+#: .\apps\account\models.py:91
+msgid "Users profile"
+msgstr "پروفایل کاربران"
+
+#: .\apps\account\models.py:111
+msgid "Blocked User"
+msgstr "کاربر بلاک شده"
+
+#: .\apps\account\models.py:112 .\templates\account\block_list.html:18
+msgid "Blocked Users"
+msgstr "کاربران بلاک شده"
+
+#: .\apps\account\serializers.py:50
+msgid "A user with this email has already registered."
+msgstr "کاربری با این ایمیل قبلاً ثبت نام کرده است."
+
+#: .\apps\account\serializers.py:65
+msgid "Password is required"
+msgstr "نیازمند رمز عبور"
+
+#: .\apps\account\views\api_views.py:100
+msgid "OTP code sent"
+msgstr "کد احراز هویت فرستاده شد"
+
+#: .\apps\account\views\api_views.py:244
+msgid "Password recovery code sent."
+msgstr "کد بازیابی رمز عبور ارسال شد."
+
+#: .\apps\account\views\api_views.py:292
+msgid "Your password has been successfully changed"
+msgstr "رمز عبور شما با موفقیت تغییر یافت"
+
+#: .\apps\account\views\api_views.py:326
+msgid "Confirm code sent"
+msgstr "کد ارسال شده را تایید کنید"
+
+#: .\apps\account\views\api_views.py:361
+msgid "Your email confirmed successfully"
+msgstr "ایمیل شما با موفقیت تایید شد"
+
+#: .\apps\account\views\api_views.py:401
+msgid "Register otp code sent"
+msgstr "کد احراز هویت ارسال شده را ثبت کنید"
+
+#: .\apps\account\views\template_views.py:27
+msgid "You are successfully logged in."
+msgstr "شما با موفقیت وارد سیستم شدید."
+
+#: .\apps\account\views\template_views.py:42
+msgid "Registration successful. You can now log in."
+msgstr "ثبت نام با موفقیت انجام شد. اکنون می‌توانید وارد شوید."
+
+#: .\apps\account\views\template_views.py:46
+msgid "Please correct the errors below."
+msgstr "لطفا خطاهای زیر را اصلاح کنید."
+
+#: .\apps\account\views\template_views.py:89
+msgid "Code sent to you"
+msgstr "کد برای شما ارسال شد"
+
+#: .\apps\account\views\template_views.py:122
+msgid "Register done successful"
+msgstr "ثبت نام با موفقیت انجام شد"
+
+#: .\apps\account\views\template_views.py:179
+msgid "Password successfully reset"
+msgstr "رمز عبور با موفقیت بازنشانی شد"
+
+#: .\apps\account\views\template_views.py:193
+msgid "You have been logged out"
+msgstr "شما از سیستم خارج شده‌اید"
+
+#: .\apps\account\views\template_views.py:206
+msgid "Access denied."
+msgstr "دسترسی رد شد."
+
+#: .\apps\account\views\template_views.py:211
+msgid "Admin user created successfully."
+msgstr "کاربر مدیر با موفقیت ایجاد شد."
+
+#: .\apps\account\views\template_views.py:256
+msgid "Your profile has been updated successfully."
+msgstr "پروفایل شما با موفقیت به‌روزرسانی شد."
+
+#: .\apps\account\views\template_views.py:276
+#: .\apps\account\views\template_views.py:320
+msgid "User List"
+msgstr "فهرست کاربران"
+
+#: .\apps\account\views\template_views.py:287
+msgid "User is already blocked."
+msgstr "کاربر از قبل مسدود شده است."
+
+#: .\apps\account\views\template_views.py:290
+msgid "User has been blocked."
+msgstr "کاربر مسدود شده است."
+
+#: .\apps\account\views\template_views.py:300
+msgid "User has been deleted."
+msgstr "کاربر حذف شده است."
+
+#: .\apps\account\views\template_views.py:332
+msgid "User is not blocked."
+msgstr "کاربر مسدود نشده است."
+
+#: .\apps\account\views\template_views.py:335
+msgid "User has been unblocked."
+msgstr "کاربر از حالت مسدود خارج شد."
+
+#: .\apps\core\exceptions.py:42
+msgid "Validation error"
+msgstr "خطای اعتبارسنجی"
+
+#: .\apps\core\exceptions.py:48
+msgid "The operation has already been done"
+msgstr "عملیات قبلاً انجام شده است"
+
+#: .\apps\core\exceptions.py:54
+msgid "Field is required"
+msgstr "فیلد الزامی است"
+
+#: .\apps\core\exceptions.py:60
+msgid "Field is not valid"
+msgstr "فیلد معتبر نیست"
+
+#: .\apps\core\exceptions.py:66
+msgid "App section disabled"
+msgstr "بخش برنامه غیرفعال شد"
+
+#: .\apps\core\models.py:7
+msgid "Creation Time"
+msgstr "تاریخ ایجاد "
+
+#: .\apps\core\models.py:8
+msgid "Update Time"
+msgstr "تاریخ بروزرسانی"
+
+#: .\apps\core\utils.py:50
+#, python-format
+msgid "%(days)s days ago."
+msgstr ""
+
+#: .\apps\core\utils.py:52
+#, python-format
+msgid "%(hours)s hours ago."
+msgstr ""
+
+#: .\apps\core\utils.py:54
+#, python-format
+msgid "%(minutes)s minutes ago."
+msgstr ""
+
+#: .\apps\core\utils.py:56
+msgid "Moments ago"
+msgstr "لحظاتی پیش"
+
+#: .\apps\core\utils.py:69 .\apps\core\utils.py:83
+msgid "Entered data is not correct."
+msgstr "اطلاعات وارد شده صحیح نیست."
+
+#: .\apps\core\validators.py:10
+msgid "Ensure character are persian"
+msgstr "مطمئن شوید که کاراکترها فارسی هستند"
+
+#: .\apps\dashboard\apps.py:8 .\templates\base\header.html:15
+#: .\templates\base\header.html:34 .\templates\base\header.html:70
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: .\apps\job\admin.py:37
+msgid "Salary range"
+msgstr "محدوده حقوق و دستمزد"
+
+#: .\apps\job\admin.py:41
+msgid "Is active"
+msgstr "فعال"
+
+#: .\apps\job\admin.py:70 .\apps\job\models.py:49
+msgid "Seeker"
+msgstr "جستجوگر"
+
+#: .\apps\job\admin.py:74 .\apps\job\apps.py:8 .\apps\job\models.py:24
+#: .\apps\job\models.py:47
+#: .\templates\jobs\employer\employer_application_list.html:36
+msgid "Job"
+msgstr "شغل"
+
+#: .\apps\job\admin.py:78
+msgid "Has resume"
+msgstr "رزومه"
+
+#: .\apps\job\admin.py:82
+msgid "Is pending"
+msgstr "در حال بررسی"
+
+#: .\apps\job\enums.py:7
+msgid "Full time"
+msgstr "تمام وقت"
+
+#: .\apps\job\enums.py:8
+msgid "Part time"
+msgstr "پاره وقت"
+
+#: .\apps\job\enums.py:9
+msgid "Remote"
+msgstr "دورکاری"
+
+#: .\apps\job\enums.py:10
+msgid "Internship"
+msgstr "کارآموزی"
+
+#: .\apps\job\enums.py:15
+msgid "Submitted"
+msgstr "ارسال شده"
+
+#: .\apps\job\enums.py:16 .\templates\dashboard\dashboard_job_seeker.html:42
+msgid "Rejected"
+msgstr "رد شده"
+
+#: .\apps\job\enums.py:17 .\templates\dashboard\dashboard_job_seeker.html:34
+msgid "Accepted"
+msgstr "تایید شده"
+
+#: .\apps\job\forms.py:25
+msgid "Job Title"
+msgstr "عنوان کار"
+
+#: .\apps\job\forms.py:26
+msgid "Job Description"
+msgstr "توضیحات شغل"
+
+#: .\apps\job\forms.py:27 .\apps\job\models.py:16
+#: .\templates\jobs\employer\employer_accepted_jobs.html:36
+#: .\templates\jobs\job_detail.html:19
+msgid "Location"
+msgstr "مکان"
+
+#: .\apps\job\forms.py:28 .\apps\job\models.py:17
+#: .\templates\jobs\job_detail.html:32
+msgid "Employment type"
+msgstr "نوع استخدام"
+
+#: .\apps\job\forms.py:29 .\apps\job\models.py:18
+msgid "Salary min"
+msgstr "حداقل حقوق"
+
+#: .\apps\job\forms.py:30 .\apps\job\models.py:19
+msgid "Salary max"
+msgstr "حداکثر حقوق"
+
+#: .\apps\job\forms.py:31 .\apps\job\models.py:20
+msgid "Is approved"
+msgstr "تایید شده"
+
+#: .\apps\job\forms.py:32 .\apps\job\models.py:21
+msgid "Is closed"
+msgstr "بسته شده"
+
+#: .\apps\job\forms.py:36
+msgid "Please enter a job title."
+msgstr "لطفا عنوان شغلی را وارد کنید."
+
+#: .\apps\job\forms.py:37
+msgid "Title is too long."
+msgstr "عنوان خیلی طولانی است."
+
+#: .\apps\job\models.py:14
+msgid "Title"
+msgstr "عنوان"
+
+#: .\apps\job\models.py:15 .\templates\jobs\job_detail.html:37
+msgid "Description"
+msgstr "توضیحات"
+
+#: .\apps\job\models.py:25
+msgid "Jobs"
+msgstr "کارها"
+
+#: .\apps\job\models.py:40
+msgid "Not specified"
+msgstr "مشخص نشده"
+
+#: .\apps\job\models.py:50
+msgid "Cover letter"
+msgstr "نامه پوششی"
+
+#: .\apps\job\models.py:51
+msgid "Resume"
+msgstr "رزمه"
+
+#: .\apps\job\models.py:52
+#: .\templates\jobs\employer\employer_application_list.html:39
+#: .\templates\jobs\seeker\my_applications.html:33
+msgid "Status"
+msgstr "وضعیت"
+
+#: .\apps\job\models.py:55
+msgid "Application"
+msgstr "درخواست شغل"
+
+#: .\apps\job\models.py:56 .\templates\dashboard\dashboard_employer.html:63
+msgid "Applications"
+msgstr "درخواست های شغل"
+
+#: .\apps\job\views.py:38
+msgid "All"
+msgstr "همه"
+
+#: .\apps\job\views.py:39
+msgid "Job List"
+msgstr "لیست کار ها"
+
+#: .\apps\job\views.py:75
+msgid "Job posting created successfully."
+msgstr "آگهی استخدام با موفقیت ایجاد شد."
+
+#: .\apps\job\views.py:116
+msgid "Application accepted and job closed."
+msgstr "درخواست پذیرفته و شغل بسته شد."
+
+#: .\apps\job\views.py:126
+msgid "Application rejected."
+msgstr "درخواست رد شد."
+
+#: .\apps\job\views.py:163
+msgid "You do not have permission to edit this job posting."
+msgstr "شما اجازه ویرایش این آگهی استخدام را ندارید."
+
+#: .\apps\job\views.py:178 .\templates\jobs\job_detail.html:46
+msgid "You have already applied for this job."
+msgstr "شما قبلاً برای این شغل درخواست داده‌اید."
+
+#: .\apps\job\views.py:188
+msgid "Your application has been submitted."
+msgstr "درخواست شما ثبت شد."
+
+#: .\apps\job\views.py:211
+msgid "Your application has been cancelled."
+msgstr "درخواست شما لغو شده است."
+
+#: .\apps\notification\apps.py:8
+msgid "Notifications"
+msgstr "اعلان ها"
+
+#: .\apps\notification\models.py:10
+msgid "email title"
+msgstr "عنوان ایمیل"
+
+#: .\apps\notification\models.py:11
+msgid "description"
+msgstr "توضیحات"
+
+#: .\apps\notification\models.py:12
+msgid "send email"
+msgstr "ارسال ایمیل"
+
+#: .\apps\notification\models.py:13
+msgid "to user"
+msgstr "به کاربر"
+
+#: .\apps\notification\models.py:16
+msgid "Email Notification"
+msgstr "اعلان ایمیل"
+
+#: .\apps\notification\models.py:17
+msgid "Email Notifications"
+msgstr "اعلان های ایمیل"
+
+#: .\templates\account\admin\create_admin.html:6
+#: .\templates\account\admin\create_admin.html:16
+msgid "Create Admin User"
+msgstr "ساخت کاربر ادمین"
+
+#: .\templates\account\admin\create_admin.html:59
+msgid "Create"
+msgstr "ساخت"
+
+#: .\templates\account\block_list.html:23
+#: .\templates\account\user_list.html:20
+msgid "Search by email..."
+msgstr "جستوجو با ایمیل"
+
+#: .\templates\account\block_list.html:27
+#: .\templates\account\user_list.html:24 .\templates\jobs\job_list.html:37
+msgid "Search"
+msgstr "جستوجو"
+
+#: .\templates\account\block_list.html:36
+#: .\templates\account\user_list.html:33
+msgid "Full Name"
+msgstr "نام کامل"
+
+#: .\templates\account\block_list.html:39
+#: .\templates\account\user_list.html:36
+msgid "Actions"
+msgstr "فعالیت ها"
+
+#: .\templates\account\block_list.html:53
+msgid "Unblock this user?"
+msgstr "این کاربر را از حالت مسدود خارج کنید؟"
+
+#: .\templates\account\block_list.html:55
+msgid "Unblock user"
+msgstr "رفع انسداد کاربر"
+
+#: .\templates\account\block_list.html:56
+msgid "Unblock"
+msgstr "رفع انسداد"
+
+#: .\templates\account\block_list.html:64
+#: .\templates\account\user_list.html:61
+msgid "Delete this user?"
+msgstr "این کاربر حذف شود؟"
+
+#: .\templates\account\block_list.html:66
+#: .\templates\account\user_list.html:63
+msgid "Delete user"
+msgstr "حذف کاربر"
+
+#: .\templates\account\block_list.html:67
+#: .\templates\account\user_list.html:64
+#: .\templates\jobs\employer\employer_job_list.html:52
+msgid "Delete"
+msgstr "حذف"
+
+#: .\templates\account\block_list.html:83
+#: .\templates\account\user_list.html:80
+#: .\templates\jobs\employer\employer_accepted_jobs.html:50
+#: .\templates\jobs\employer\employer_application_list.html:89
+#: .\templates\jobs\employer\employer_job_list.html:64
+#: .\templates\jobs\job_list.html:64
+msgid "Previous"
+msgstr "قبلی"
+
+#: .\templates\account\block_list.html:88
+#: .\templates\account\user_list.html:85
+#: .\templates\jobs\employer\employer_accepted_jobs.html:55
+#: .\templates\jobs\employer\employer_application_list.html:94
+#: .\templates\jobs\employer\employer_job_list.html:69
+#: .\templates\jobs\job_list.html:69
+msgid "Page"
+msgstr "صفحه"
+
+#: .\templates\account\block_list.html:88
+#: .\templates\account\user_list.html:85
+#: .\templates\jobs\employer\employer_accepted_jobs.html:55
+#: .\templates\jobs\employer\employer_application_list.html:94
+#: .\templates\jobs\employer\employer_job_list.html:69
+#: .\templates\jobs\job_list.html:69
+msgid "of"
+msgstr "از "
+
+#: .\templates\account\block_list.html:94
+#: .\templates\account\user_list.html:91
+#: .\templates\jobs\employer\employer_accepted_jobs.html:61
+#: .\templates\jobs\employer\employer_application_list.html:100
+#: .\templates\jobs\employer\employer_job_list.html:75
+#: .\templates\jobs\job_list.html:75
+msgid "Next"
+msgstr "بعدی"
+
+#: .\templates\account\block_list.html:101
+msgid "No blocked users found."
+msgstr "هیچ کاربر مسدود شده‌ای یافت نشد."
+
+#: .\templates\account\edit_profile.html:6 .\templates\account\profile.html:44
+msgid "Edit Profile"
+msgstr "ویرایش پروفایل"
+
+#: .\templates\account\edit_profile.html:16
+msgid "Edit Your Profile"
+msgstr "ویرایش پروفایل شما"
+
+#: .\templates\account\edit_profile.html:24
+#: .\templates\account\profile.html:27
+#: .\templates\account\public_profile.html:25
+msgid "First Name"
+msgstr "نام"
+
+#: .\templates\account\edit_profile.html:32
+#: .\templates\account\profile.html:28
+#: .\templates\account\public_profile.html:26
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: .\templates\account\edit_profile.html:131
+#: .\templates\jobs\employer\employer_job_confirm_delete.html:40
+#: .\templates\jobs\employer\employer_job_form.html:143
+msgid "Cancel"
+msgstr "لغو"
+
+#: .\templates\account\edit_profile.html:135
+#: .\templates\jobs\employer\employer_job_form.html:138
+msgid "Save Changes"
+msgstr "ذخیره تغییرات"
+
+#: .\templates\account\login.html:7 .\templates\account\login.html:53
+msgid "Login"
+msgstr "ورود"
+
+#: .\templates\account\login.html:17
+msgid "login to your account"
+msgstr "ورود به حساب کاربری"
+
+#: .\templates\account\login.html:47
+msgid "remember me"
+msgstr "مرا به خاطر بسپار"
+
+#: .\templates\account\login.html:61
+msgid "Don't have an account? Register"
+msgstr "حساب کاربری ندارید؟ ثبت نام کنید"
+
+#: .\templates\account\login.html:67
+msgid "forget password"
+msgstr "رمز عبور را فراموش کرده‌ام"
+
+#: .\templates\account\password\forget_code.html:6
+msgid "Forgot Password"
+msgstr "رمز عبور را فراموش کرده‌ام"
+
+#: .\templates\account\password\forget_code.html:17
+msgid "Forgot Your Password?"
+msgstr "رمز عبور خود را فراموش کرده‌اید؟"
+
+#: .\templates\account\password\forget_code.html:29
+msgid "09__"
+msgstr "__09"
+
+#: .\templates\account\password\forget_code.html:39
+msgid "Send Verification Code"
+msgstr "ارسال کد تایید"
+
+#: .\templates\account\password\forget_code.html:46
+msgid "Back to Login"
+msgstr "بازگشت به ورود"
+
+#: .\templates\account\password\reset_pass_complete.html:6
+msgid "Set New Password"
+msgstr "تنظیم رمز عبور جدید"
+
+#: .\templates\account\password\reset_pass_complete.html:12
+msgid "Set a New Password"
+msgstr "رمز عبور جدید تنظیم کنید"
+
+#: .\templates\account\password\reset_pass_complete.html:23
+#: .\templates\account\password\reset_pass_complete.html:38
+msgid "**"
+msgstr "**"
+
+#: .\templates\account\password\reset_pass_complete.html:48
+msgid "Save Password"
+msgstr "ذخیره رمز عبور"
+
+#: .\templates\account\password\reset_pass_confirm.html:6
+msgid "Reset Password Confirmation"
+msgstr "تأیید رمز عبور"
+
+#: .\templates\account\password\reset_pass_confirm.html:12
+#: .\templates\account\password\reset_pass_confirm.html:21
+#: .\templates\account\password\verify_email.html:21
+msgid "Verification Code"
+msgstr "کد تأیید"
+
+#: .\templates\account\password\reset_pass_confirm.html:23
+msgid "12345"
+msgstr "12345"
+
+#: .\templates\account\password\reset_pass_confirm.html:33
+#: .\templates\jobs\employer\job_create.html:121
+msgid "Submit"
+msgstr "ارسال"
+
+#: .\templates\account\password\verify_email.html:6
+msgid "Verify Email"
+msgstr "تأیید ایمیل"
+
+#: .\templates\account\password\verify_email.html:12
+msgid "Email Verification"
+msgstr "تأیید ایمیل"
+
+#: .\templates\account\password\verify_email.html:23
+msgid "Enter your code"
+msgstr "کد خود را وارد کنید"
+
+#: .\templates\account\password\verify_email.html:33
+msgid "Verify and Continue"
+msgstr "تأیید و ادامه"
+
+#: .\templates\account\profile.html:6 .\templates\base\header.html:14
+#: .\templates\base\header.html:33 .\templates\base\header.html:69
+msgid "Profile"
+msgstr "پروفایل"
+
+#: .\templates\account\profile.html:30
+#: .\templates\account\public_profile.html:28
+msgid "National ID"
+msgstr "کد ملی"
+
+#: .\templates\account\register.html:6 .\templates\account\register.html:93
+msgid "Register"
+msgstr "ثبت نام"
+
+#: .\templates\account\register.html:15
+msgid "User Registration"
+msgstr "ثبت نام کاربر"
+
+#: .\templates\account\register.html:101
+msgid "Already have an account? Login"
+msgstr "قبلاً حساب کاربری دارید؟ ورود"
+
+#: .\templates\account\user_list.html:50
+msgid "Block this user?"
+msgstr "این کاربر را مسدود کنید؟"
+
+#: .\templates\account\user_list.html:52
+msgid "Block user"
+msgstr "مسدود کردن کاربر"
+
+#: .\templates\account\user_list.html:53
+msgid "Block"
+msgstr "انسداد"
+
+#: .\templates\account\user_list.html:98
+msgid "No users found."
+msgstr "هیچ کاربری یافت نشد."
+
+#: .\templates\base\header.html:8 .\templates\base\header.html:59
+msgid "Logo"
+msgstr "لوگو"
+
+#: .\templates\base\header.html:13 .\templates\base\header.html:68
+msgid "Home"
+msgstr "خانه"
+
+#: .\templates\base\header.html:16 .\templates\base\header.html:71
+msgid "Help"
+msgstr "کمک"
+
+#: .\templates\base\header.html:35 .\templates\base\header.html:72
+#: .\templates\dashboard\dashboard_admin.html:88
+#: .\templates\dashboard\dashboard_employer.html:80
+#: .\templates\dashboard\dashboard_job_seeker.html:70
+msgid "Logout"
+msgstr "خروج"
+
+#: .\templates\base\header.html:41 .\templates\base\header.html:77
+msgid "Contact Us"
+msgstr "ارتباط با ما"
+
+#: .\templates\base\header.html:42 .\templates\base\header.html:78
+msgid "Enter your email for quick contact."
+msgstr "برای ارتباط سریع، ایمیل خود را وارد کنید."
+
+#: .\templates\base\header.html:46 .\templates\base\header.html:82
+msgid "Your email"
+msgstr "ایمیل شما"
+
+#: .\templates\base\header.html:50 .\templates\base\header.html:86
+msgid "Send"
+msgstr "ارسال"
+
+#: .\templates\dashboard\dashboard_admin.html:5
+msgid "Admin Dashboard"
+msgstr "داشبورد مدیریتی"
+
+#: .\templates\dashboard\dashboard_admin.html:16
+#: .\templates\dashboard\dashboard_employer.html:16
+#: .\templates\dashboard\dashboard_job_seeker.html:18
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+#: .\templates\dashboard\dashboard_admin.html:23
+msgid "Pending Jobs"
+msgstr "مشاغل در انتظار"
+
+#: .\templates\dashboard\dashboard_admin.html:31
+msgid "Active Jobs"
+msgstr "مشاغل فعال"
+
+#: .\templates\dashboard\dashboard_admin.html:39
+msgid "Total Users"
+msgstr "کل کاربران"
+
+#: .\templates\dashboard\dashboard_admin.html:47
+#: .\templates\dashboard\dashboard_employer.html:31
+msgid "Total Applications"
+msgstr "کل درخواست‌ها"
+
+#: .\templates\dashboard\dashboard_admin.html:56
+msgid "Create Job"
+msgstr "ایجاد شغل"
+
+#: .\templates\dashboard\dashboard_admin.html:61
+msgid "Create New Admin"
+msgstr "ایجاد ادمین جدید"
+
+#: .\templates\dashboard\dashboard_admin.html:66
+msgid "Block a User"
+msgstr "مسدود کردن یک کاربر"
+
+#: .\templates\dashboard\dashboard_admin.html:71
+msgid "All Users"
+msgstr "همه کاربران"
+
+#: .\templates\dashboard\dashboard_admin.html:76
+#: .\templates\dashboard\dashboard_employer.html:48
+msgid "All Jobs"
+msgstr "همه مشاغل"
+
+#: .\templates\dashboard\dashboard_admin.html:81
+#: .\templates\dashboard\dashboard_employer.html:73
+#: .\templates\dashboard\dashboard_job_seeker.html:62
+msgid "Profile Settings"
+msgstr "تنظیمات پروفایل"
+
+#: .\templates\dashboard\dashboard_employer.html:5
+msgid "Employer Dashboard"
+msgstr "داشبورد کارفرما"
+
+#: .\templates\dashboard\dashboard_employer.html:23
+msgid "Jobs Posted"
+msgstr "مشاغل ارسال شده"
+
+#: .\templates\dashboard\dashboard_employer.html:39
+#: .\templates\dashboard\dashboard_employer.html:68
+msgid "Accepted Applications"
+msgstr "درخواست‌های پذیرفته‌شده"
+
+#: .\templates\dashboard\dashboard_employer.html:53
+msgid "Create New Job"
+msgstr "ایجاد شغل جدید"
+
+#: .\templates\dashboard\dashboard_employer.html:58
+msgid "My Jobs"
+msgstr "شغل‌های من"
+
+#: .\templates\dashboard\dashboard_job_seeker.html:5
+msgid "JobSeeker Dashboard"
+msgstr "داشبورد کارجویان"
+
+#: .\templates\dashboard\dashboard_job_seeker.html:26
+msgid "Applied Jobs"
+msgstr "مشاغل کاربردی"
+
+#: .\templates\dashboard\dashboard_job_seeker.html:52
+msgid "Browse Jobs"
+msgstr "مرور مشاغل"
+
+#: .\templates\dashboard\dashboard_job_seeker.html:57
+#: .\templates\jobs\seeker\my_applications.html:5
+#: .\templates\jobs\seeker\my_applications.html:18
+msgid "My Applications"
+msgstr "برنامه‌های من"
+
+#: .\templates\jobs\employer\employer_accepted_jobs.html:5
+#: .\templates\jobs\employer\employer_accepted_jobs.html:18
+msgid "Accepted Jobs"
+msgstr "مشاغل پذیرفته شده"
+
+#: .\templates\jobs\employer\employer_accepted_jobs.html:28
+msgid "Taken by"
+msgstr "گرفته شده توسط"
+
+#: .\templates\jobs\employer\employer_accepted_jobs.html:39
+#: .\templates\jobs\job_detail.html:33
+msgid "Salary"
+msgstr "حقوق"
+
+#: .\templates\jobs\employer\employer_accepted_jobs.html:69
+msgid "No accepted jobs yet."
+msgstr "هنوز هیچ شغلی پذیرفته نشده است."
+
+#: .\templates\jobs\employer\employer_application_list.html:6
+#: .\templates\jobs\employer\employer_application_list.html:19
+msgid "Received Applications"
+msgstr "درخواست‌های دریافتی"
+
+#: .\templates\jobs\employer\employer_application_list.html:45
+msgid "Cover Letter"
+msgstr "نامه پوششی"
+
+#: .\templates\jobs\employer\employer_application_list.html:57
+msgid "Download Resume"
+msgstr "دانلود رزومه"
+
+#: .\templates\jobs\employer\employer_application_list.html:68
+msgid "Approve"
+msgstr "تأیید"
+
+#: .\templates\jobs\employer\employer_application_list.html:76
+msgid "Reject"
+msgstr "رد"
+
+#: .\templates\jobs\employer\employer_application_list.html:108
+msgid "No applications received yet."
+msgstr "هنوز هیچ درخواستی دریافت نشده است."
+
+#: .\templates\jobs\employer\employer_job_confirm_delete.html:6
+#: .\templates\jobs\employer\employer_job_confirm_delete.html:19
+msgid "Delete Job Posting"
+msgstr "حذف آگهی استخدام"
+
+#: .\templates\jobs\employer\employer_job_confirm_delete.html:24
+msgid "Are you sure you want to delete the job posting:"
+msgstr "آیا از حذف آگهی استخدام مطمئن هستید؟"
+
+#: .\templates\jobs\employer\employer_job_confirm_delete.html:35
+msgid "Confirm Delete"
+msgstr "تایید حذف"
+
+#: .\templates\jobs\employer\employer_job_form.html:6
+#: .\templates\jobs\employer\employer_job_form.html:17
+msgid "Edit Job Posting"
+msgstr "ویرایش آگهی استخدام"
+
+#: .\templates\jobs\employer\employer_job_list.html:6
+#: .\templates\jobs\employer\employer_job_list.html:19
+msgid "My Job Postings"
+msgstr "آگهی‌های شغلی من"
+
+#: .\templates\jobs\employer\employer_job_list.html:37
+msgid "Inactive"
+msgstr "غیرفعال"
+
+#: .\templates\jobs\employer\employer_job_list.html:47
+msgid "Edit"
+msgstr "ویرایش"
+
+#: .\templates\jobs\employer\employer_job_list.html:83
+msgid "You haven't posted any jobs yet."
+msgstr "شما هنوز هیچ شغلی ارسال نکرده‌اید."
+
+#: .\templates\jobs\employer\job_create.html:4
+#: .\templates\jobs\employer\job_create.html:14
+msgid "Create New Job Posting"
+msgstr "ایجاد آگهی شغلی جدید"
+
+#: .\templates\jobs\job_detail.html:50
+msgid "Apply for this job"
+msgstr "برای این شغل درخواست دهید"
+
+#: .\templates\jobs\job_detail.html:54
+msgid "Employers cannot apply for jobs."
+msgstr "کارفرمایان نمی‌توانند برای شغل درخواست دهند."
+
+#: .\templates\jobs\job_detail.html:61
+#: .\templates\jobs\seeker\my_applications.html:60
+msgid "Back to job listings"
+msgstr "بازگشت به فهرست مشاغل"
+
+#: .\templates\jobs\job_list.html:18
+msgid "Available Jobs"
+msgstr "مشاغل موجود"
+
+#: .\templates\jobs\job_list.html:23
+msgid "Search by title..."
+msgstr "جستجو بر اساس عنوان ..."
+
+#: .\templates\jobs\job_list.html:82
+msgid "No jobs available at the moment."
+msgstr "در حال حاضر هیچ شغلی موجود نیست."
+
+#: .\templates\jobs\seeker\job_apply.html:4
+msgid "Apply"
+msgstr "اعمال کردن"
+
+#: .\templates\jobs\seeker\job_apply.html:15
+msgid "Apply for"
+msgstr "درخواست برای"
+
+#: .\templates\jobs\seeker\job_apply.html:54
+msgid "Submit Application"
+msgstr "ارسال درخواست"
+
+#: .\templates\jobs\seeker\job_apply.html:63
+msgid "Back to job details"
+msgstr "بازگشت به جزئیات کار"
+
+#: .\templates\jobs\seeker\my_applications.html:41
+msgid "Are you sure you want to cancel this application?"
+msgstr "آیا مطمئن هستید که می‌خواهید این برنامه را لغو کنید؟"
+
+#: .\templates\jobs\seeker\my_applications.html:43
+msgid "Cancel Application"
+msgstr "لغو درخواست"
+
+#: .\templates\jobs\seeker\my_applications.html:52
+msgid "You haven't applied for any jobs yet."
+msgstr "You haven't applied for any jobs yet."
