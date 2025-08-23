@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "My Notifications" %}
+{% endblock %}
+
+{% block content %}
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-white shadow-xl rounded-3xl max-w-4xl mx-auto p-10 relative overflow-hidden">
+
+    <!-- تزئینات پس‌زمینه -->
+    <div class="absolute -top-16 -right-16 w-40 h-40 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-16 -left-16 w-52 h-52 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+    <!-- عنوان -->
+    <h1 class="text-4xl font-extrabold text-gray-800 mb-8 text-center">
+      📬 {% trans "My Notifications" %}
+    </h1>
+
+    {% if notifications %}
+      <ul class="space-y-6">
+        {% for notification in notifications %}
+          <li class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
+            <h2 class="text-lg font-semibold text-indigo-600">{{ notification.get_title }}</h2>
+            <p class="text-gray-700 mt-2 whitespace-pre-line">{{ notification.description }}</p>
+            <div class="text-sm text-gray-500 mt-4">
+              {% trans "Email Sent" %}:
+              {% if notification.send_email %}
+                <span class="text-green-600 font-medium">{% trans "Yes" %}</span>
+              {% else %}
+                <span class="text-red-600 font-medium">{% trans "No" %}</span>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- صفحه‌بندی -->
+      {% if is_paginated %}
+        <div class="mt-8 flex justify-center items-center gap-2 text-sm">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+               class="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 transition">
+              ← {% trans "Previous" %}
+            </a>
+          {% endif %}
+
+          <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded">
+            {% trans "Page" %} {{ page_obj.number }}
+          </span>
+
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 transition">
+              {% trans "Next" %} →
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% else %}
+      <p class="text-center text-gray-500 mt-6">{% trans "No notifications found." %}</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

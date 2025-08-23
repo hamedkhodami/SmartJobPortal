@@ -17,7 +17,7 @@ from ..forms import LoginForm, GetEmailForm, ResetPassForm, VerifyEmailForm, Reg
 
 class LoginView(LogoutRequiredMixin, FormView):
 
-    template_name = 'account/login.html'
+    template_name = 'account/user/login.html'
     form_class = LoginForm
     success_url = reverse_lazy('dashboard:dashboard')
 
@@ -33,7 +33,7 @@ class LoginView(LogoutRequiredMixin, FormView):
 
 
 class RegisterView(LogoutRequiredMixin, FormView):
-    template_name = 'account/register.html'
+    template_name = 'account/user/register.html'
     form_class = RegisterForm
     success_url = reverse_lazy('account:login')
 
@@ -217,7 +217,7 @@ class CreateAdminView(AccessRequiredMixin, FormView):
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
-    template_name = 'account/profile.html'
+    template_name = 'account/profile/profile.html'
     model = UserProfileModel
     context_object_name = 'profile'
 
@@ -227,7 +227,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
 class PublicProfileView(LoginRequiredMixin, DetailView):
     model = UserProfileModel
-    template_name = 'account/public_profile.html'
+    template_name = 'account/profile/public_profile.html'
     context_object_name = 'profile'
 
     def get_object(self):
@@ -238,7 +238,7 @@ class PublicProfileView(LoginRequiredMixin, DetailView):
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = UserProfileModel
     form_class = EditProfileForm
-    template_name = 'account/edit_profile.html'
+    template_name = 'account/profile/edit_profile.html'
     success_url = reverse_lazy('account:profile')
 
     def get_object(self, queryset=None):
@@ -259,7 +259,7 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 
 class UserListView(LoginRequiredMixin, AccessRequiredMixin, ListView):
     model = User
-    template_name = 'account/user_list.html'
+    template_name = 'account/user/user_list.html'
     context_object_name = 'users'
     roles = ['admin']
     paginate_by = 5
@@ -302,11 +302,11 @@ class DeleteUserView(LoginRequiredMixin, AccessRequiredMixin, View):
 
 
 class UserBlockListView(LoginRequiredMixin, AccessRequiredMixin, ListView):
-    template_name = 'account/block_list.html'
+    template_name = 'account/user/block_list.html'
     model = User
     roles = ['admin']
     context_object_name = 'users'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = User.objects.filter(userblock__isnull=False).order_by('-created_at')

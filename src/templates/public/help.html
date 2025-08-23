@@ -1,0 +1,63 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+  {% trans "Guide" %}
+{% endblock %}
+
+{% block content %}
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-white shadow-xl rounded-3xl max-w-4xl mx-auto p-10 relative overflow-hidden">
+
+    <!-- تزئینات پس‌زمینه -->
+    <div class="absolute -top-16 -right-16 w-40 h-40 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-16 -left-16 w-52 h-52 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+    <!-- عنوان -->
+    <h2 class="text-4xl font-extrabold text-gray-800 mb-8 text-center">
+      {% trans "How to Use the Platform" %}
+    </h2>
+
+    <!-- مقدمه -->
+    <p class="text-gray-700 text-lg leading-relaxed mb-6 text-center">
+      {% trans "This platform helps you find jobs or hire talent with ease. Here's a quick overview:" %}
+    </p>
+
+    <!-- بخش نقش‌ها -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold text-indigo-700 mb-4">{% trans "User Roles" %}</h3>
+      <ul class="space-y-3 text-gray-700 text-base list-disc list-inside">
+        <li>
+          <strong>{% trans "Employer" %}:</strong>
+          {% trans "Create job listings, review applicants, and manage your hiring process." %}
+        </li>
+        <li>
+          <strong>{% trans "Job Seeker" %}:</strong>
+          {% trans "Build your profile, apply for jobs, and track your applications." %}
+        </li>
+      </ul>
+    </div>
+
+    <!-- بخش جست‌وجوی شغل -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold text-indigo-700 mb-4">{% trans "Finding a Job" %}</h3>
+      <ul class="space-y-3 text-gray-700 text-base list-decimal list-inside">
+        <li>{% trans "Go to the Jobs section." %}</li>
+        <li>{% trans "Use filters to narrow down by category, location, or type." %}</li>
+        <li>{% trans "Click on a job to view details and apply directly." %}</li>
+      </ul>
+    </div>
+
+    <!-- بخش نکات -->
+    <div>
+      <h3 class="text-xl font-semibold text-indigo-700 mb-4">{% trans "Tips" %}</h3>
+      <ul class="space-y-3 text-gray-700 text-base list-disc list-inside">
+        <li>{% trans "Complete your profile for better visibility." %}</li>
+        <li>{% trans "Use clear titles and descriptions when posting jobs." %}</li>
+        <li>{% trans "Check your dashboard regularly for updates." %}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+  {% trans "About Us" %}
+{% endblock %}
+
+{% block content %}
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-white shadow-xl rounded-3xl max-w-4xl mx-auto p-10 relative overflow-hidden">
+
+    <!-- تزئینات پس‌زمینه -->
+    <div class="absolute -top-16 -right-16 w-40 h-40 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-16 -left-16 w-52 h-52 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+    <!-- عنوان -->
+    <h2 class="text-4xl font-extrabold text-gray-800 mb-8 text-center">
+      {% trans "About Us" %}
+    </h2>
+
+    <!-- متن اصلی -->
+    <div class="space-y-6 text-gray-700 text-lg leading-relaxed">
+      <p>
+        {% trans "This platform was built with a clear mission: to connect talent with opportunity, and to make the hiring process more human, transparent, and efficient." %}
+      </p>
+
+      <p>
+        {% trans "We believe that every job is more than a title, and every applicant is more than a resume. Our system is designed to respect both sides of the hiring journey—with tools that empower employers to find the right fit, and seekers to present their true selves." %}
+      </p>
+
+      <p>
+        {% trans "Built by developers who care about clean architecture, accessibility, and meaningful design, this project is a reflection of both technical precision and emotional depth." %}
+      </p>
+
+      <p>
+        {% trans "Whether you're here to hire, to be hired, or just to explore, we're glad you're part of this story." %}
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+  {% trans "Unread Contact Requests" %}
+{% endblock %}
+
+{% block content %}
+<div class="px-4 py-10 md:pr-72">
+  <div class="bg-accountForm shadow-xl rounded-3xl max-w-5xl mx-auto p-8 relative overflow-hidden">
+
+    <!-- تزئینات پس‌زمینه -->
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
+
+    <!-- عنوان -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">{% trans "Unread Contact Requests" %}</h2>
+
+    {% if contacts %}
+      <ul class="space-y-6">
+        {% for contact in contacts %}
+          <li class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-lg font-semibold text-gray-800">{{ contact.title }}</p>
+                <p class="text-sm text-gray-500">{{ contact.email }}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                {% if not contact.is_read %}
+                  <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                    {% trans "Unread" %}
+                  </span>
+                {% else %}
+                  <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                    {% trans "Read" %}
+                  </span>
+                {% endif %}
+                <a href="{% url 'public:contact_reply' contact.id %}"
+                   class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-500 transition">
+                  {% trans "Reply" %}
+                </a>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- صفحه‌بندی -->
+      {% if is_paginated %}
+        <div class="mt-8 flex justify-center items-center gap-2 text-sm">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              ← {% trans "Previous" %}
+            </a>
+          {% endif %}
+
+          <span class="px-3 py-1 text-gray-600">
+            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
+          </span>
+
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition">
+              {% trans "Next" %} →
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% else %}
+      <p class="text-center text-gray-500 mt-6">{% trans "No unread contact requests found." %}</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

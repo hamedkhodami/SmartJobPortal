@@ -19,7 +19,7 @@ class JobListView(LoginRequiredMixin, ListView):
     model = JobModel
     template_name = 'jobs/job_list.html'
     context_object_name = 'jobs'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         qs = JobModel.objects.filter(is_approved=True, is_closed=False).order_by('-created_at')
@@ -85,7 +85,7 @@ class EmployerJobListView(LoginRequiredMixin, JobEmployerRequiredMixin, ListView
     model = JobModel
     template_name = 'jobs/employer/employer_job_list.html'
     context_object_name = 'jobs'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         return JobModel.objects.filter(employer=self.request.user).order_by('-created_at')
@@ -95,7 +95,7 @@ class EmployerApplicationListView(LoginRequiredMixin, JobEmployerRequiredMixin, 
     model = ApplicationModel
     template_name = 'jobs/employer/employer_application_list.html'
     context_object_name = 'applications'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         return (ApplicationModel.objects
@@ -141,7 +141,7 @@ class EmployerAcceptedJobsView(LoginRequiredMixin, JobEmployerRequiredMixin, Lis
     model = ApplicationModel
     template_name = 'jobs/employer/employer_accepted_jobs.html'
     context_object_name = 'accepted_jobs'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         return (ApplicationModel.objects
@@ -199,7 +199,7 @@ class MyApplicationsView(LoginRequiredMixin, JobSeekerRequiredMixin, ListView):
     model = ApplicationModel
     template_name = 'jobs/seeker/my_applications.html'
     context_object_name = 'applications'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         return ApplicationModel.objects.select_related('job').filter(seeker=self.request.user).order_by('-created_at')

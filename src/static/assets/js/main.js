@@ -130,3 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200 + i * 100);
   });
 });
+
+
+
+setTimeout(() => {
+const container = document.getElementById('messages-container');
+if (container) {
+  container.style.transition = 'opacity 0.5s ease';
+  container.style.opacity = '0';
+  setTimeout(() => container.remove(), 500);
+}
+}, 5000);
